@@ -13,12 +13,8 @@ import {
     PopoverTrigger,
     PopoverContent,
     useColorModeValue,
-    useBreakpointValue,
     Image,
     useDisclosure,
-    Input,
-    InputGroup,
-    InputRightElement,
     Container
 } from '@chakra-ui/react'
 import {
@@ -26,7 +22,6 @@ import {
     CloseIcon,
     ChevronDownIcon,
     ChevronRightIcon,
-    SearchIcon
 } from '@chakra-ui/icons'
 import { lato, merriweather_sans, poppins } from '@/app/fonts'
 
@@ -60,7 +55,7 @@ export default function Navbar() {
                         />
                     </Flex>
                     <Flex spacing={6} flex={{ base: 1 }} py={2} justify={{ base: 'center', md: 'start' }}>
-                        <Image src={"/connectJCU.svg"} height={"55px"}/>
+                        <Image src={"/connectJCU.svg"} height={"55px"} />
                     </Flex>
                     <Flex display={{ base: 'none', md: 'flex' }} spacing={6} flex={{ base: 1 }} py={2} justify={{ base: 'center', md: 'start' }}>
                         <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
@@ -74,7 +69,7 @@ export default function Navbar() {
                         direction={'row'}
                         spacing={6}>
                         <Button className={`${poppins.className}`} as={'a'} fontSize={'sm'} _hover={{ color: "#000" }} fontWeight={400} variant={'link'} href={'#'}>
-                            Sign Up
+                            Login
                         </Button>
                         <Button
                             className={`${poppins.className}`}
@@ -88,7 +83,7 @@ export default function Navbar() {
                             _hover={{
                                 opacity: "0.7"
                             }}>
-                            Login
+                            Join Now
                         </Button>
                     </Stack>
                 </Flex>
@@ -109,7 +104,7 @@ const DesktopNav = () => {
     return (
         <Stack direction={'row'} spacing={10} justifyContent={"center"} alignItems={"center"}>
             {NAV_ITEMS.map((navItem) => (
-                <Box borderBottom={pathname === navItem.href ? "3px solid #3394d7": "none"} key={navItem.label}>
+                <Box borderBottom={pathname === navItem.href ? "3px solid #3394d7" : "none"} key={navItem.label}>
                     <Popover trigger={'hover'} placement={'bottom-start'}>
                         <PopoverTrigger>
                             <Box
@@ -117,7 +112,7 @@ const DesktopNav = () => {
                                 width={"fit-content"}
                                 p={2}
                                 href={navItem.href ?? '#'}
-                                fontWeight={pathname === navItem.href ? 700 : 500} // Bold if current page
+                                fontWeight={pathname === navItem.href ? 700 : 500}
                                 color={pathname === navItem.href ? "#3394d7" : linkColor}
                                 lineHeight={2}
                                 className={`${poppins.className}`}
@@ -191,7 +186,7 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
 
 const MobileNav = () => {
     return (
-        <Stack bg={useColorModeValue('white', 'gray.800')} p={4} display={{ md: 'none' }}>
+        <Stack bg={useColorModeValue('white', 'gray.800')} p={4} maxW={"250px"} display={{ md: 'none' }}>
             {NAV_ITEMS.map((navItem) => (
                 <MobileNavItem key={navItem.label} {...navItem} />
             ))}
@@ -201,7 +196,8 @@ const MobileNav = () => {
 
 const MobileNavItem = ({ label, children, href }) => {
     const { isOpen, onToggle } = useDisclosure()
-
+    const pathname = usePathname()
+    console.log('mv',href)
     return (
         <Stack spacing={4} onClick={children && onToggle}>
             <Box
@@ -210,10 +206,12 @@ const MobileNavItem = ({ label, children, href }) => {
                 href={href ?? '#'}
                 justifyContent="space-between"
                 alignItems="center"
+                fontWeight={pathname === href ? 700 : 500}
+                color={pathname === href ? "#3394d7" : "#000"}
                 _hover={{
                     textDecoration: 'none',
                 }}>
-                <Text fontWeight={600} color={useColorModeValue('gray.600', 'gray.200')}>
+                <Text>
                     {label}
                 </Text>
                 {children && (
@@ -262,7 +260,7 @@ const NAV_ITEMS = [
     },
     {
         label: 'Q/A',
-        href: 'qna',
+        href: '/qna',
     },
 
 ]
