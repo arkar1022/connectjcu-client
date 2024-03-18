@@ -27,6 +27,7 @@ import { lato, merriweather_sans, poppins } from '@/app/fonts'
 
 export default function Navbar() {
     const { isOpen, onToggle } = useDisclosure()
+    const router = useRouter();
 
     return (
         <Box width={"100%"} bg={useColorModeValue('white', 'gray.800')}
@@ -68,7 +69,7 @@ export default function Navbar() {
                         justify={'flex-end'}
                         direction={'row'}
                         spacing={6}>
-                        <Button className={`${poppins.className}`} as={'a'} fontSize={'sm'} _hover={{ color: "#000" }} fontWeight={400} variant={'link'} href={'#'}>
+                        <Button as={"a"} href={"/login"} className={`${poppins.className}`} fontSize={'sm'} _hover={{ color: "#000" }} fontWeight={400} variant={'link'}>
                             Login
                         </Button>
                         <Button
