@@ -6,7 +6,7 @@ const Home = () => {
         <Container maxW="96em" mt={8}>
             <Box position={"relative"}>
                 <Image filter={"brightness(0.4)"} borderRadius={"5px"} src="/assets/home_banner.jpg" height={{ base: "250", md: "400px" }} width={"100%"} objectFit={"cover"} />
-                <Text fontSize={{ sm: "70px", md: "90px" }} fontWeight={700} className={`${jomhuria.className}`} color={"#fff"} position={"absolute"} top={"50%"} left={"50%"} transform={"translate(-50%, -50%)"}>
+                <Text fontSize={{ base: "70px", md: "90px" }} fontWeight={700} className={`${jomhuria.className}`} color={"#fff"} position={"absolute"} top={"50%"} left={"50%"} transform={"translate(-50%, -50%)"}>
                     HOME
                 </Text>
             </Box>
