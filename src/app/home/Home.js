@@ -18,7 +18,7 @@ const Home = () => {
                     <Box flex={"1"} width={"100%"}>
                         <Image src="/assets/student_com.jpg" />
                     </Box>
-                    <Text lineHeight={{base:"30px",md:"30px",lg:"35px"}} width={"100%"} flex={"1"} mt={8} textAlign={"justify"} px={7} fontSize={{base:"16px",md:"18px"}} className={`${plus_jakarta.className}`}>
+                    <Text lineHeight={{base:"30px",md:"30px",lg:"35px"}} width={"100%"} flex={"1"} mt={8} textAlign={"justify"} px={4} fontSize={{base:"16px",md:"18px"}} className={`${plus_jakarta.className}`}>
                         Welcome to <b>ConnectJCU</b>, the ultimate community platform designed exclusively for James Cook University 
                         students. Here, students can come together to connect, share, and engage in meaningful discussions. Whether 
                         you're looking to share your experiences through blogs, discover insightful articles and resources, or seek 
