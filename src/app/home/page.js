@@ -1,9 +1,7 @@
 import Image from "next/image";
-
-export default function Home() {
+import Home from "./Home";
+export default function HomeMain() {
   return (
-    <main>
-         hello, this is home
-    </main>
+  <Home />
   );
 }

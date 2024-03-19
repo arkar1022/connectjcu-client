@@ -7,6 +7,9 @@ import {
 	Play,
 	Poppins,
 	Roboto,
+	Fahkwang,
+	Jomhuria,
+	Plus_Jakarta_Sans,
 } from "next/font/google";
 
 export const inter = Inter({ subsets: ["latin"] });
@@ -51,4 +54,25 @@ export const michroma = Michroma({
 	variable: "--font-michroma",
 	display: "swap",
 	weight: ['400'],
+})
+
+export const plus_jakarta = Plus_Jakarta_Sans({
+	subsets: ["latin"],
+	variable: "--font-plus_jakarta",
+	display: "swap",
+	weight: ["200", "300", "400", "500", "600", "700"],
+})
+
+export const jomhuria = Jomhuria({
+	subsets: ["latin"],
+	variable: "--font-jomhuria",
+	display: "swap",
+	weight: ["400"],
+})
+
+export const fahkwang = Fahkwang({
+	subsets: ["latin"],
+	variable: "--font-fahkwang",
+	display: "swap",
+	weight: ["200", "300", "400", "500", "600", "700"],
 })

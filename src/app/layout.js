@@ -4,6 +4,7 @@ import "./globals.css";
 import { Providers } from "./providers";
 import theme from "./theme";
 import Navbar from "./components/navbar/Navbar";
+import Footer from "./components/footer/Footer";
 
 export const metadata = {
 	title: "ConnectJCU",
@@ -44,7 +45,7 @@ export default async function RootLayout(props) {
 					<main style={{ minHeight: '100vh', paddingTop:"60px" }}>
 						{props.children}
 					</main>
-					{/* <Footer /> */}
+					<Footer />
 				</Providers>
 			</body>
 		</html>
