@@ -2,8 +2,8 @@
 import { useState } from "react";
 import { Box, Divider, Container, VStack, Text, Input, InputGroup, InputLeftElement, InputRightElement, Button, HStack } from "@chakra-ui/react";
 import { inter, poppins } from "../fonts";
-import { IconMail, IconLock, IconEyeClosed, IconEye } from "@tabler/icons-react";
-const Login = () => {
+import { IconMail, IconUserCircle, IconLockCheck, IconLock, IconEyeClosed, IconEye, IconUser } from "@tabler/icons-react";
+const SignUp = () => {
     const [showPassword, setShowPassword] = useState(false);
     const handlePasswordOnClick = () => setShowPassword(!showPassword);
     return (
@@ -12,13 +12,25 @@ const Login = () => {
             <Box borderRadius={"5px"} p={5} bg={"#fff"} boxShadow={"2px 4px 10px 0px rgba(148,148,148,0.56)"} maxW={"400px"} width={"100%"}>
                 <VStack spacing={6}>
                     <Text color={"#3394d7"} fontSize={"28px"} className={`${poppins.className}`} fontWeight={600}>
-                        Welcome Back!
+                        Welcome!
                     </Text>
+                    <InputGroup>
+                        <InputLeftElement pointerEvents='none'>
+                            <IconUserCircle color='#d4d4d4' />
+                        </InputLeftElement>
+                        <Input type='text' placeholder='First Name' />
+                    </InputGroup>
+                    <InputGroup>
+                        <InputLeftElement pointerEvents='none'>
+                            <IconUserCircle color='#d4d4d4' />
+                        </InputLeftElement>
+                        <Input type='text' placeholder='Last Name' />
+                    </InputGroup>
                     <InputGroup>
                         <InputLeftElement pointerEvents='none'>
                             <IconMail color='#d4d4d4' />
                         </InputLeftElement>
-                        <Input type='tel' placeholder='Email' />
+                        <Input type='email' placeholder='Email' />
                     </InputGroup>
 
                     <InputGroup>
@@ -42,8 +54,18 @@ const Login = () => {
                             }
                         </InputRightElement>
                     </InputGroup>
+                    <InputGroup>
+                        <InputLeftElement
+                            pointerEvents='none'
+                            color='gray.300'
+                            fontSize='1.2em'
+                        >
+                            <IconLockCheck color='#d4d4d4' />
+                        </InputLeftElement>
+                        <Input placeholder='Confirm Password' type={showPassword ? 'text' : 'password'} />
+                    </InputGroup>
                     <Button my={3} width={"100%"} _hover={{background:"#3394d7", color:"#fff"}}>
-                        Login
+                        Sign Up
                     </Button>
                     <HStack w="100%" textAlign="center" justifyContent={'center'} alignItems={'center'}>
                         <Divider />
@@ -51,11 +73,11 @@ const Login = () => {
                         <Divider />
                     </HStack>
                     <HStack>
-                        <Text as={"a"} href="/signup" _hover={{cursor:"pointer"}} fontWeight={700} color={"#3394d7"}>
-                            Sign Up
+                        <Text as={"a"} href="/login" _hover={{cursor:"pointer"}} fontWeight={700} color={"#3394d7"}>
+                            Login
                         </Text>
                         <Text>
-                            If you don't have an account!
+                            If you already have an account!
                         </Text>
                     </HStack>
                 </VStack>
@@ -65,4 +87,4 @@ const Login = () => {
     )
 }
 
-export default Login
+export default SignUp

@@ -80,7 +80,7 @@ export default function Navbar() {
                             fontWeight={600}
                             color={'white'}
                             bg={"#3394d7"}
-                            href={'#'}
+                            href={'/signup'}
                             _hover={{
                                 opacity: "0.7"
                             }}>
