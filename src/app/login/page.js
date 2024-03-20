@@ -11,6 +11,7 @@ export async function LoginAccount(email,password) {
       headers: {
         "Content-Type": "application/json",
       },
+      cache:'no-store',
       body: JSON.stringify({
         email: email,
         password: password
