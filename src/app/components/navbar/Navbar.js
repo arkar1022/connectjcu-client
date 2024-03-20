@@ -50,14 +50,11 @@ export default function Navbar({ access_token, refresh_token }) {
 
     return isClient && (
        
-        <Box width={"100%"} bg={useColorModeValue('white', 'gray.800')}
-            color={useColorModeValue('gray.600', 'white')}
+        <Box width={"100%"} bg={"#fff"}
             position={"fixed"} zIndex={70000}>
                  {console.log(isAuth)}
             <Container maxW="96em" h={"100%"}>
                 <Flex
-                    bg={useColorModeValue('white', 'gray.800')}
-                    color={useColorModeValue('gray.600', 'white')}
                     h={'60px'}
                     py={{ base: 2 }}
                     px={{ base: 4 }}
@@ -128,9 +125,9 @@ export default function Navbar({ access_token, refresh_token }) {
 }
 
 const DesktopNav = () => {
-    const linkColor = useColorModeValue('gray.600', 'gray.200')
-    const linkHoverColor = useColorModeValue('gray.800', 'white')
-    const popoverContentBgColor = useColorModeValue('white', 'gray.800')
+    const linkColor = "#000"
+    const linkHoverColor = "#fff"
+    const popoverContentBgColor = "#fff"
     const pathname = usePathname()
     const router = useRouter()
     return (
@@ -140,7 +137,7 @@ const DesktopNav = () => {
                     <Popover trigger={'hover'} placement={'bottom-start'}>
                         <PopoverTrigger>
                             <Box
-                                
+                                as='a'
                                 width={"fit-content"}
                                 p={2}
                                 // href={navItem.href ?? '#'}
@@ -153,6 +150,7 @@ const DesktopNav = () => {
                                 _hover={{
                                     textDecoration: 'none',
                                     color: "#3394d7",
+                                    cursor:"pointer"
                                 }}>
                                 {navItem.label}
                             </Box>
