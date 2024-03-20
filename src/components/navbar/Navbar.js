@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
 import {
     Box,
@@ -16,8 +16,7 @@ import {
     useColorModeValue,
     Image,
     useDisclosure,
-    Container,
-    useStatStyles
+    Container
 } from '@chakra-ui/react'
 import {
     HamburgerIcon,
@@ -32,23 +31,20 @@ export default function Navbar({ access_token, refresh_token }) {
     const { isOpen, onToggle } = useDisclosure()
     const router = useRouter();
     const { setAuth, isAuth } = authStore((state) => state);
-    const [isClient, setIsClient] = useState(false)
     useEffect(() => {
         if (isAuth) {
             if (!access_token || !refresh_token) {
                 setAuth(false)
             }
-        } 
-         {
+        } else {
             if (access_token && refresh_token) {
                 setAuth(true)
             }
         }
-        setIsClient(true)
-    }, [access_token, refresh_token, isAuth])
+    }, [access_token, refresh_token])
 
 
-    return isClient && (
+    return (
        
         <Box width={"100%"} bg={useColorModeValue('white', 'gray.800')}
             color={useColorModeValue('gray.600', 'white')}
@@ -132,7 +128,6 @@ const DesktopNav = () => {
     const linkHoverColor = useColorModeValue('gray.800', 'white')
     const popoverContentBgColor = useColorModeValue('white', 'gray.800')
     const pathname = usePathname()
-    const router = useRouter()
     return (
         <Stack direction={'row'} spacing={10} justifyContent={"center"} alignItems={"center"}>
             {NAV_ITEMS.map((navItem) => (
@@ -140,11 +135,10 @@ const DesktopNav = () => {
                     <Popover trigger={'hover'} placement={'bottom-start'}>
                         <PopoverTrigger>
                             <Box
-                                
+                                as="a"
                                 width={"fit-content"}
                                 p={2}
-                                // href={navItem.href ?? '#'}
-                                onClick={()=>router.push(navItem.href)}
+                                href={navItem.href ?? '#'}
                                 fontWeight={pathname === navItem.href ? 700 : 500}
                                 color={pathname === navItem.href ? "#3394d7" : linkColor}
                                 lineHeight={2}

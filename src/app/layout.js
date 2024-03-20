@@ -5,13 +5,16 @@ import { Providers } from "./providers";
 import theme from "./theme";
 import Navbar from "./components/navbar/Navbar";
 import Footer from "./components/footer/Footer";
-
+import { cookies } from 'next/headers'
 export const metadata = {
 	title: "ConnectJCU",
 	description: "JCU Community",
 };
 
 export default async function RootLayout(props) {
+	const cookieStore = cookies()
+	const refresh_token = cookieStore.get('_refresh')?.value
+	const access_token = cookieStore.get('_access')?.value
 	return (
 		<html lang="en">
 			<head>
@@ -41,8 +44,8 @@ export default async function RootLayout(props) {
 			<body className={lato.className}>
 				<ColorModeScript initialColorMode={theme.config.initialColorMode} />
 				<Providers>
-					<Navbar />
-					<main style={{ minHeight: '100vh', paddingTop:"60px" }}>
+					<Navbar refresh_token={refresh_token} access_token={access_token} />
+					<main style={{ minHeight: '100vh', paddingTop: "60px" }}>
 						{props.children}
 					</main>
 					<Footer />
