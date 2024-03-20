@@ -17,7 +17,10 @@ import {
     Image,
     useDisclosure,
     Container,
-    useStatStyles
+    useStatStyles,
+    VStack,
+    HStack,
+    Divider,
 } from '@chakra-ui/react'
 import {
     HamburgerIcon,
@@ -25,21 +28,28 @@ import {
     ChevronDownIcon,
     ChevronRightIcon,
 } from '@chakra-ui/icons'
-import { lato, merriweather_sans, poppins } from '@/app/fonts'
+import { IconUserCircle } from '@tabler/icons-react'
+import { lato, merriweather_sans, poppins, roboto } from '@/app/fonts'
 import { authStore } from '@/stores/authStore'
 
-export default function Navbar({ access_token, refresh_token }) {
-    const { isOpen, onToggle } = useDisclosure()
+export default function Navbar({ access_token, refresh_token, LogoutAccount }) {
+    const { isOpen, onToggle, onClose } = useDisclosure()
     const router = useRouter();
     const { setAuth, isAuth } = authStore((state) => state);
     const [isClient, setIsClient] = useState(false)
+    const [isOpenUserMenu, setIsOpenUserMenu] = useState(false)
+    const pathname = usePathname()
+    const handleOpenUserMenu = () => {
+        onClose()
+        setIsOpenUserMenu(!isOpenUserMenu)
+    }
     useEffect(() => {
+        console.log(access_token)
         if (isAuth) {
             if (!access_token || !refresh_token) {
                 setAuth(false)
             }
-        } 
-         {
+        } else {
             if (access_token && refresh_token) {
                 setAuth(true)
             }
@@ -47,13 +57,19 @@ export default function Navbar({ access_token, refresh_token }) {
         setIsClient(true)
     }, [access_token, refresh_token, isAuth])
 
+    const handleLogoutAccount = async () => {
+        const isLogout = await LogoutAccount()
+        setAuth(isLogout)
+        setIsOpenUserMenu(false)
+        router.push("/")
+    }
+
 
     return isClient && (
-       
+
         <Box width={"100%"} bg={"#fff"}
             position={"fixed"} zIndex={70000}>
-                 {console.log(isAuth)}
-            <Container maxW="96em" h={"100%"}>
+            <Container pos={"relative"} maxW="96em" h={"100%"}>
                 <Flex
                     h={'60px'}
                     py={{ base: 2 }}
@@ -67,7 +83,7 @@ export default function Navbar({ access_token, refresh_token }) {
                         ml={{ base: -2 }}
                         display={{ base: 'flex', md: 'none' }}>
                         <IconButton
-                            onClick={onToggle}
+                            onClick={() => { setIsOpenUserMenu(false); onToggle(); }}
                             icon={isOpen ? <CloseIcon w={3} h={3} /> : <HamburgerIcon w={5} h={5} />}
                             variant={'ghost'}
                             aria-label={'Toggle Navigation'}
@@ -89,7 +105,7 @@ export default function Navbar({ access_token, refresh_token }) {
                         spacing={6}>
                         {
                             isAuth ? (
-                                <Box>Profile</Box>
+                                <IconButton _hover={{ color: "#3394d7" }} bg={"#fff"} icon={<IconUserCircle size={"30px"} />} onClick={handleOpenUserMenu} />
                             ) : (
                                 <>
                                     <Button as={"a"} href={"/login"} className={`${poppins.className}`} fontSize={'sm'} _hover={{ color: "#000" }} fontWeight={400} variant={'link'}>
@@ -116,9 +132,33 @@ export default function Navbar({ access_token, refresh_token }) {
                     </Stack>
                 </Flex>
 
-                <Collapse in={isOpen} animateOpacity>
+                <Collapse sx={{ maxW: "200px" }} in={isOpen} animateOpacity>
                     <MobileNav />
                 </Collapse>
+
+                <Box zIndex={2000} background={"#fff"}
+                    borderRadius={"10px"} p={4}
+                    boxShadow={"2px 4px 10px 0px rgba(148,148,148,0.56)"}
+                    pos={"absolute"} bottom={"-80px"} right={"20px"}
+                    display={isOpenUserMenu ? "block" : "none"}
+                    width={"150px"}>
+                    <VStack spacing={"10px"} alignItems={"flex-start"}>
+                        <Text _hover={{ color: "#3394d7", fontWeight: 500, cursor: "pointer" }}
+                            fontWeight={pathname === "/profile" ? 500 : 400}
+                            color={pathname === "/profile" ? "#3394d7" : "#000"}
+                            className={`${roboto.className}`}
+                            onClick={() => router.push('/profile')}
+
+                        >
+                            Profile
+                        </Text>
+                        <Divider />
+                        <Text _hover={{ color: "#3394d7", fontWeight: 500, cursor: "pointer" }} 
+                        fontWeight={400} 
+                        className={`${roboto.className}`}
+                        onClick={handleLogoutAccount}>Logout</Text>
+                    </VStack>
+                </Box>
             </Container>
         </Box>
     )
@@ -141,7 +181,7 @@ const DesktopNav = () => {
                                 width={"fit-content"}
                                 p={2}
                                 // href={navItem.href ?? '#'}
-                                onClick={()=>router.push(navItem.href)}
+                                onClick={() => router.push(navItem.href)}
                                 fontWeight={pathname === navItem.href ? 700 : 500}
                                 color={pathname === navItem.href ? "#3394d7" : linkColor}
                                 lineHeight={2}
@@ -150,7 +190,7 @@ const DesktopNav = () => {
                                 _hover={{
                                     textDecoration: 'none',
                                     color: "#3394d7",
-                                    cursor:"pointer"
+                                    cursor: "pointer"
                                 }}>
                                 {navItem.label}
                             </Box>
@@ -228,7 +268,6 @@ const MobileNav = () => {
 const MobileNavItem = ({ label, children, href }) => {
     const { isOpen, onToggle } = useDisclosure()
     const pathname = usePathname()
-    console.log('mv', href)
     return (
         <Stack spacing={4} onClick={children && onToggle}>
             <Box

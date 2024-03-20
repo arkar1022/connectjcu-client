@@ -6,7 +6,6 @@ export async function LoginAccount(email,password) {
   try {
     const oneDay = 24 * 60 * 60 * 1000 * 1
     const fiveHour = 5 * 60 * 60 * 100
-    console.log("api", process.env.API_URL)
     const res = await fetch(`${process.env.API_URL}/api/v1/auth/login/`, {
       method: 'POST',
       headers: {

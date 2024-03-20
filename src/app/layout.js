@@ -6,6 +6,7 @@ import theme from "./theme";
 import Navbar from "./components/navbar/Navbar";
 import Footer from "./components/footer/Footer";
 import { cookies } from 'next/headers'
+import { LogoutAccount } from "./actions";
 export const metadata = {
 	title: "ConnectJCU",
 	description: "JCU Community",
@@ -44,7 +45,7 @@ export default async function RootLayout(props) {
 			<body className={lato.className}>
 				<ColorModeScript initialColorMode={theme.config.initialColorMode} />
 				<Providers>
-					<Navbar refresh_token={refresh_token} access_token={access_token} />
+					<Navbar LogoutAccount={LogoutAccount} refresh_token={refresh_token} access_token={access_token} />
 					<main style={{ minHeight: '100vh', paddingTop: "60px" }}>
 						{props.children}
 					</main>
