@@ -1,7 +1,8 @@
 import SignUp from "./SignUp";
-export default function SignUpMain() {
+import { RegisterAccount } from "../actions";
+export default async function SignUpMain() {
     return (
-        <SignUp />
+        <SignUp RegisterAccount={RegisterAccount} />
     );
   }
   

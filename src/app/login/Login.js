@@ -1,11 +1,11 @@
 'use client';
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { Box, Divider, Container, VStack, Text, Input, InputGroup, InputLeftElement, InputRightElement, Button, HStack } from "@chakra-ui/react";
 import { inter, poppins } from "../fonts";
 import LoginBtn from "./LoginBtn";
 import { IconMail, IconLock, IconEyeClosed, IconEye } from "@tabler/icons-react";
-const Login = ({ LoginAccount }) => {
+const Login = ({ LoginAccount, prev }) => {
     const [showPassword, setShowPassword] = useState(false);
     const handlePasswordOnClick = () => setShowPassword(!showPassword);
     const [email, setEmail] = useState("")
@@ -16,12 +16,15 @@ const Login = ({ LoginAccount }) => {
     const handleLogin = async () => {
         setIsErrorMsg(null)
         const isLoginSuccess = await LoginAccount(email, password);
-        setIsLogin(isLoginSuccess);
-        if (isLoginSuccess) {
-            router.refresh()
-            router.back()
+        setIsLogin(isLoginSuccess.success);
+        if (isLoginSuccess.success) {
+            if (prev.startsWith('/email-verification/')) {
+                router.push('/');
+              } else {
+                router.back(); 
+              }
         } else {
-            setIsErrorMsg("Invalid Username or Password")
+            setIsErrorMsg(isLoginSuccess.message)
         }
     }
     const handleEmailChange = (e) => {
@@ -78,9 +81,6 @@ const Login = ({ LoginAccount }) => {
                                {isErrorMsg}
                             </Text>
                             <LoginBtn />
-                            {/* <Button my={3} onClick={handleLogin} width={"100%"} _hover={{ background: "#3394d7", color: "#fff" }}>
-                                Login
-                            </Button> */}
                      
                         <HStack my={4} w="100%" textAlign="center" justifyContent={'center'} alignItems={'center'}>
                             <Divider />
