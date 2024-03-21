@@ -18,11 +18,13 @@ const Login = ({ LoginAccount, prev }) => {
         const isLoginSuccess = await LoginAccount(email, password);
         setIsLogin(isLoginSuccess.success);
         if (isLoginSuccess.success) {
-            if (prev.startsWith('/email-verification/')) {
-                router.push('/');
-              } else {
-                router.back(); 
-              }
+            router.refresh()
+            router.push('/')
+            // if (prev.startsWith('/email-verification/')) {
+            //     router.push('/');
+            //   } else {
+            //     router.back(); 
+            //   }
         } else {
             setIsErrorMsg(isLoginSuccess.message)
         }
