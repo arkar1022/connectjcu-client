@@ -1,7 +1,6 @@
 "use client";
 import { poppins, roboto, work_sans } from "@/app/fonts";
 import { Box, Button, Text, Badge, VStack, Image, HStack } from "@chakra-ui/react";
-import { useRouter } from "next/navigation";
 const BlogCard = () => {
     return (
         <Box transition={"all 0.2s ease-in"} _hover={{ cursor: "pointer", transition: "all 0.2s ease-in", transform: "scale(1.02)" }} borderRadius={"10px"} width={"100%"} boxShadow={"0px 0px 6px -1px rgba(196,196,196,0.75)"}>
