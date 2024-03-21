@@ -53,7 +53,7 @@ const Login = ({ LoginAccount, prev }) => {
                                 <InputLeftElement pointerEvents='none'>
                                     <IconMail color='#d4d4d4' />
                                 </InputLeftElement>
-                                <Input onChange={handleEmailChange} type='tel' placeholder='Email' />
+                                <Input onChange={handleEmailChange} type='email' placeholder='Email' />
                             </InputGroup>
 
                             <InputGroup mb={2}>
