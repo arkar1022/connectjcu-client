@@ -23,7 +23,7 @@ export async function RegisterAccount(email, first_name, last_name, password) {
 			return { "success": true };
 		} else if (!res.ok) {
 			console.log("Error:", data);
-			return { "success": false, "message": data?.detail || data?.email || "Invalid Username or Password" };
+			return { "success": false, "message": data?.detail || data?.email || (data.password ? "Password must be at least 6" :  "Unexpected Error Occur") };
 		}
 
 		console.log("register resposne:", data)
