@@ -10,6 +10,7 @@ import {
 	Fahkwang,
 	Jomhuria,
 	Plus_Jakarta_Sans,
+	Work_Sans
 } from "next/font/google";
 
 export const inter = Inter({ subsets: ["latin"] });
@@ -73,6 +74,13 @@ export const jomhuria = Jomhuria({
 export const fahkwang = Fahkwang({
 	subsets: ["latin"],
 	variable: "--font-fahkwang",
+	display: "swap",
+	weight: ["200", "300", "400", "500", "600", "700"],
+})
+
+export const work_sans = Work_Sans({
+	subsets: ["latin"],
+	variable: "--font-work_sans",
 	display: "swap",
 	weight: ["200", "300", "400", "500", "600", "700"],
 })

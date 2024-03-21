@@ -80,7 +80,6 @@ export async function LoginAccount(email, password) {
 
 export async function LogoutAccount() {
 	try {
-		console.log("hello")
 		const refresh_token = cookies().get('_refresh')?.value
 		const access_token = cookies().get('_access')?.value
 		const res = await fetch(`${process.env.API_URL}/api/v1/auth/logout/`, {

@@ -1,9 +1,7 @@
-import Image from "next/image";
+import Blog from "./Blog";
 
-export default function Blog() {
+export default function BlogMain() {
   return (
-    <main>
-         hello, this is blog
-    </main>
+   <Blog />
   );
 }

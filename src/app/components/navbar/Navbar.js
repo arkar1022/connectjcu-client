@@ -105,7 +105,8 @@ export default function Navbar({ access_token, refresh_token, LogoutAccount }) {
                         spacing={6}>
                         {
                             isAuth ? (
-                                <IconButton _hover={{ color: "#3394d7" }} bg={"#fff"} icon={<IconUserCircle size={"30px"} />} onClick={handleOpenUserMenu} />
+                                //<IconButton _hover={{ color: "#3394d7" }} bg={"#fff"} icon={<IconUserCircle size={"30px"} />} onClick={handleOpenUserMenu} />
+                                <Image cursor={"pointer"} height={"36px"} width={"36px"} onClick={handleOpenUserMenu} objectFit={"cover"} borderRadius={"50%"} src="https://t3.ftcdn.net/jpg/04/97/66/28/360_F_497662812_7rGW6PMBJR9AbrKcGgN5S1luXYTjH92i.jpg" />
                             ) : (
                                 <>
                                     <Button as={"a"} href={"/login"} className={`${poppins.className}`} fontSize={'sm'} _hover={{ color: "#000" }} fontWeight={400} variant={'link'}>
