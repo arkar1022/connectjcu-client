@@ -6,7 +6,7 @@ const VerifyBtn = () => {
     return (
 
         <Button type="submit" _hover={{ background: "#1773b3" }} color={"#fff"} bg={"#3394d7"}>
-             {pending ? <Spinner /> : 'Login'}
+             {pending ? <Spinner /> : 'Verify'}
         </Button>
     )
 }
