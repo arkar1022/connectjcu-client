@@ -1,5 +1,6 @@
+'use server'
 import Verified from "./verified";
-const verifyEmail = async (otp) => {
+export const VerifyEmail = async (otp) => {
     try {
         const res = await fetch(`${process.env.API_URL}/api/v1/auth/verify-email/`, {
           method: 'POST',
@@ -24,8 +25,8 @@ const verifyEmail = async (otp) => {
 }
 export default async function VerifyMain({params}) {
     const {otp} = params;
-    const isVerified = await verifyEmail(otp)
+    // const isVerified = await verifyEmail(otp)
     return (
-      <Verified isVerified={isVerified} />
+      <Verified VerifyEmail={VerifyEmail} otp={otp}/>
     );
   }
