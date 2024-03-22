@@ -8,7 +8,7 @@ import Footer from "./components/footer/Footer";
 import { cookies } from 'next/headers'
 import { LogoutAccount } from "./actions";
 export const metadata = {
-	title: "ConnectJCU",
+	title: "ConnectJCU Platform",
 	description: "JCU Community",
 };
 
