@@ -6,7 +6,7 @@ import theme from "./theme";
 import Navbar from "./components/navbar/Navbar";
 import Footer from "./components/footer/Footer";
 import { cookies } from 'next/headers'
-import { LogoutAccount } from "./actions";
+import { LogoutAccount } from "./auth_actions";
 export const metadata = {
 	title: "ConnectJCU Platform",
 	description: "JCU Community",

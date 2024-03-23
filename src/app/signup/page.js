@@ -1,5 +1,5 @@
 import SignUp from "./SignUp";
-import { RegisterAccount } from "../actions";
+import { RegisterAccount } from "../auth_actions";
 export default async function SignUpMain() {
     return (
         <SignUp RegisterAccount={RegisterAccount} />

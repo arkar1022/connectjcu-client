@@ -105,3 +105,27 @@ export async function LogoutAccount() {
 	}
 
 }
+
+export const VerifyEmail = async (otp) => {
+    try {
+        const res = await fetch(`${process.env.API_URL}/api/v1/auth/verify-email/`, {
+          method: 'POST',
+          headers: {
+            "Content-Type": "application/json",
+          },
+          cache:'no-store',
+          body: JSON.stringify({
+            otp: otp
+          }),
+        })
+        if (!res.ok){
+          return false
+        }
+        const data = await res.json();
+        console.log("verify resposne:",data)
+        return true
+      }
+      catch {
+        return false
+      }
+}
