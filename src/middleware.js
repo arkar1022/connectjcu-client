@@ -7,10 +7,10 @@ export async function middleware(request) {
 
     const accessToken = request.cookies.get("_access")?.value;
     const refreshToken = request.cookies.get("_refresh")?.value;
-    console.log(refreshToken)
 
     if (!refreshToken) {
-        if (request.url === '/') {
+        console.log("request_url", request.nextUrl.pathname)
+        if (request.nextUrl.pathname === '/') {
             return NextResponse.next();
         }
         return NextResponse.redirect(new URL(`/login`, request.url));
@@ -27,7 +27,7 @@ export async function middleware(request) {
                     httpOnly: true,
                     path: '/',
                 });
-                if (request.url === '/') {
+                if (request.nextUrl.pathname  === '/') {
                     return NextResponse.next();
                 }
                 return NextResponse.redirect(
