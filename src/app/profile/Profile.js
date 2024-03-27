@@ -47,7 +47,7 @@ export default function Profile({res}) {
                     </VStack>
                 </VStack>
             ) : (
-                null
+                <Box>Erro Fetching Data</Box>
             )}
 
         </Container>
