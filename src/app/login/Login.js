@@ -5,6 +5,8 @@ import { Box, Divider, Container, VStack, Text, Input, InputGroup, InputLeftElem
 import { inter, poppins } from "../fonts";
 import LoginBtn from "./LoginBtn";
 import { IconMail, IconLock, IconEyeClosed, IconEye } from "@tabler/icons-react";
+import { authStore } from "@/stores/authStore";
+
 const Login = ({ LoginAccount, prev }) => {
     const [showPassword, setShowPassword] = useState(false);
     const handlePasswordOnClick = () => setShowPassword(!showPassword);
@@ -12,12 +14,20 @@ const Login = ({ LoginAccount, prev }) => {
     const [password, setPassword] = useState("")
     const [isLogin, setIsLogin] = useState(false)
     const [isErrorMsg, setIsErrorMsg] = useState(null)
+
+    const { setAuth, isAuth, setUserInfo } = authStore((state) => state);
+
     const router = useRouter()
+
+
     const handleLogin = async () => {
         setIsErrorMsg(null)
-        const isLoginSuccess = await LoginAccount(email, password);
-        setIsLogin(isLoginSuccess.success);
-        if (isLoginSuccess.success) {
+        const res = await LoginAccount(email, password);
+        setIsLogin(res.success);
+        if (res.success) {
+            setAuth(true)
+            const data = res.data
+            setUserInfo({first_name:data.first_name,full_name:data.full_name,email:data.email,image:data.profile_image})
             router.refresh()
             router.push('/')
             // if (prev.startsWith('/email-verification/')) {
@@ -26,7 +36,7 @@ const Login = ({ LoginAccount, prev }) => {
             //     router.back(); 
             //   }
         } else {
-            setIsErrorMsg(isLoginSuccess.message)
+            setIsErrorMsg(res.message)
         }
     }
     const handleEmailChange = (e) => {

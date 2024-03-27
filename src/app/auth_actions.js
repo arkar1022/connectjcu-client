@@ -71,7 +71,7 @@ export async function LoginAccount(email, password) {
 			httpOnly: true,
 			path: '/',
 		})
-		return { "success": true }
+		return { "success": true, data }
 	}
 	catch {
 		return { "success": false, "message": "Invalid Credential" }

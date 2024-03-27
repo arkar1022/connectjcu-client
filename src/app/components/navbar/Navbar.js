@@ -35,7 +35,7 @@ import { authStore } from '@/stores/authStore'
 export default function Navbar({ access_token, refresh_token, LogoutAccount }) {
     const { isOpen, onToggle, onClose } = useDisclosure()
     const router = useRouter();
-    const { setAuth, isAuth } = authStore((state) => state);
+    const { setAuth, isAuth, userInfo, setUserInfo } = authStore((state) => state);
     const [isClient, setIsClient] = useState(false)
     const [isOpenUserMenu, setIsOpenUserMenu] = useState(false)
     const pathname = usePathname()
@@ -60,6 +60,7 @@ export default function Navbar({ access_token, refresh_token, LogoutAccount }) {
     const handleLogoutAccount = async () => {
         const isLogout = await LogoutAccount()
         setAuth(isLogout)
+        setUserInfo(null)
         setIsOpenUserMenu(false)
         router.push("/")
     }
@@ -105,8 +106,19 @@ export default function Navbar({ access_token, refresh_token, LogoutAccount }) {
                         spacing={6}>
                         {
                             isAuth ? (
-                                //<IconButton _hover={{ color: "#3394d7" }} bg={"#fff"} icon={<IconUserCircle size={"30px"} />} onClick={handleOpenUserMenu} />
-                                <Image cursor={"pointer"} height={"36px"} width={"36px"} onClick={handleOpenUserMenu} objectFit={"cover"} borderRadius={"50%"} src="https://t3.ftcdn.net/jpg/04/97/66/28/360_F_497662812_7rGW6PMBJR9AbrKcGgN5S1luXYTjH92i.jpg" />
+                                <>
+                                {
+                                    userInfo?.image ? (
+                                        <Image cursor={"pointer"} height={"36px"} width={"36px"} onClick={handleOpenUserMenu} objectFit={"cover"} borderRadius={"50%"} src={userInfo.image} />
+                                    ) :(
+                                        <Image cursor={"pointer"} height={"36px"} width={"36px"} onClick={handleOpenUserMenu} objectFit={"cover"} borderRadius={"50%"} src={"/assets/profile_default.jpeg"} />
+                                        //  <IconButton _hover={{ color: "#3394d7" }} bg={"#fff"} icon={<IconUserCircle size={"30px"} />} onClick={handleOpenUserMenu} />
+                                    )
+                                }
+                                
+                                </>
+                               
+                               
                             ) : (
                                 <>
                                     <Button as={"a"} href={"/login"} className={`${poppins.className}`} fontSize={'sm'} _hover={{ color: "#000" }} fontWeight={400} variant={'link'}>
