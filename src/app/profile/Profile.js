@@ -1,5 +1,5 @@
 "use client"
-import { Container, HStack, Image, VStack, Text } from "@chakra-ui/react";
+import { Container, HStack, Image, VStack, Text, Box } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { IconUser, IconMail, IconCalendar } from "@tabler/icons-react";
 import { plus_jakarta } from "../fonts";
