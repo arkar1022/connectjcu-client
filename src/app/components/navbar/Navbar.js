@@ -64,7 +64,7 @@ export default function Navbar({ access_token, refresh_token, LogoutAccount }) {
 
     const handleLogoutAccount = async () => {
         const isLogout = await LogoutAccount()
-        setAuth(isLogout)
+        setAuth(!isLogout)
         setUserInfo(null)
         setIsOpenUserMenu(false)
         router.push("/")
