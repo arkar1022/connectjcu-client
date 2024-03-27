@@ -2,7 +2,9 @@
 import { cookies } from 'next/headers'
 
 export async function RegisterAccount(email, first_name, last_name, password) {
+	
 	try {
+		console.log("sign up")
 		const res = await fetch(`${process.env.API_URL}/api/v1/auth/register/`, {
 			method: 'POST',
 			headers: {
@@ -16,6 +18,7 @@ export async function RegisterAccount(email, first_name, last_name, password) {
 				password: password
 			}),
 		})
+		console.log("res",res)
 		const data = await res.json();
 		console.log(data)
 		if (res.status === 201) {
@@ -39,6 +42,8 @@ export async function LoginAccount(email, password) {
 	try {
 		const oneDay = 24 * 60 * 60 * 1000 * 1
 		const fiveHour = 5 * 60 * 60 * 100
+		console.log("login here")
+		console.log(email,password)
 		const res = await fetch(`${process.env.API_URL}/api/v1/auth/login/`, {
 			method: 'POST',
 			headers: {
@@ -73,8 +78,9 @@ export async function LoginAccount(email, password) {
 		})
 		return { "success": true, data }
 	}
-	catch {
-		return { "success": false, "message": "Invalid Credential","api":process.env.API_URL}
+	catch(error) {
+		console.log(error)
+		return { "success": false, "message": "Invalid Credential"}
 	}
 }
 
@@ -128,4 +134,11 @@ export const VerifyEmail = async (otp) => {
       catch {
         return false
       }
+}
+
+export const GetCookie = async () => {
+	const cookie = cookies()
+	const accessToken = cookie.get('_access')?.value
+	const refreshToken = cookie.get('_refresh')?.value
+	return {accessToken,refreshToken}
 }

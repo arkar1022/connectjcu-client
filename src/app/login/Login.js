@@ -7,7 +7,7 @@ import LoginBtn from "./LoginBtn";
 import { IconMail, IconLock, IconEyeClosed, IconEye } from "@tabler/icons-react";
 import { authStore } from "@/stores/authStore";
 
-const Login = ({ LoginAccount, prev }) => {
+const Login = ({ LoginAccount }) => {
     const [showPassword, setShowPassword] = useState(false);
     const handlePasswordOnClick = () => setShowPassword(!showPassword);
     const [email, setEmail] = useState("")
@@ -36,7 +36,6 @@ const Login = ({ LoginAccount, prev }) => {
             //     router.back(); 
             //   }
         } else {
-            console.log(res.api)
             setIsErrorMsg(res.message)
         }
     }

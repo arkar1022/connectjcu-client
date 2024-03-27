@@ -7,8 +7,12 @@ export async function middleware(request) {
 
     const accessToken = request.cookies.get("_access")?.value;
     const refreshToken = request.cookies.get("_refresh")?.value;
+    console.log(refreshToken)
 
     if (!refreshToken) {
+        if (request.url === '/') {
+            return NextResponse.next();
+        }
         return NextResponse.redirect(new URL(`/login`, request.url));
     }
 
@@ -18,6 +22,14 @@ export async function middleware(request) {
         try {
             const refreshedTokenResponse = await refreshAccessToken(refreshToken);
             if (refreshedTokenResponse.error) {
+                response.cookies.set("_access", validAccessToken, {
+                    expires: Date.now() + (5 * 60 * 60 * 100),
+                    httpOnly: true,
+                    path: '/',
+                });
+                if (request.url === '/') {
+                    return NextResponse.next();
+                }
                 return NextResponse.redirect(
                     new URL(`/login`, request.url)
                 );
@@ -58,6 +70,7 @@ export async function middleware(request) {
 
 export const config = {
     matcher: [
+        "/",
         "/blog/:path*",
         "/profile/:path*",
         "/resources/:path*",

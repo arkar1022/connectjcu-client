@@ -31,6 +31,7 @@ import {
 import { IconUserCircle } from '@tabler/icons-react'
 import { lato, merriweather_sans, poppins, roboto } from '@/app/fonts'
 import { authStore } from '@/stores/authStore'
+import { GetCookie } from '@/app/auth_actions'
 
 export default function Navbar({ access_token, refresh_token, LogoutAccount }) {
     const { isOpen, onToggle, onClose } = useDisclosure()
@@ -44,18 +45,22 @@ export default function Navbar({ access_token, refresh_token, LogoutAccount }) {
         setIsOpenUserMenu(!isOpenUserMenu)
     }
     useEffect(() => {
-        console.log(access_token)
-        if (isAuth) {
-            if (!access_token || !refresh_token) {
-                setAuth(false)
-            }
-        } else {
-            if (access_token && refresh_token) {
-                setAuth(true)
+        const validate = async () => {
+            const {accessToken, refreshToken} = await GetCookie()
+            if (isAuth) {
+                if (!accessToken && !refreshToken) {
+                    setAuth(false)
+                    setUserInfo(null)
+                }
+            } else {
+                if (accessToken && refreshToken) {
+                    setAuth(true)
+                }
             }
         }
+        validate()
         setIsClient(true)
-    }, [access_token, refresh_token, isAuth])
+    }, [isAuth])
 
     const handleLogoutAccount = async () => {
         const isLogout = await LogoutAccount()
@@ -107,18 +112,18 @@ export default function Navbar({ access_token, refresh_token, LogoutAccount }) {
                         {
                             isAuth ? (
                                 <>
-                                {
-                                    userInfo?.image ? (
-                                        <Image cursor={"pointer"} height={"36px"} width={"36px"} onClick={handleOpenUserMenu} objectFit={"cover"} borderRadius={"50%"} src={userInfo.image} />
-                                    ) :(
-                                        <Image cursor={"pointer"} height={"36px"} width={"36px"} onClick={handleOpenUserMenu} objectFit={"cover"} borderRadius={"50%"} src={"/assets/profile_default.jpeg"} />
-                                        //  <IconButton _hover={{ color: "#3394d7" }} bg={"#fff"} icon={<IconUserCircle size={"30px"} />} onClick={handleOpenUserMenu} />
-                                    )
-                                }
-                                
+                                    {
+                                        userInfo?.image ? (
+                                            <Image cursor={"pointer"} height={"36px"} width={"36px"} onClick={handleOpenUserMenu} objectFit={"cover"} borderRadius={"50%"} src={userInfo.image} />
+                                        ) : (
+                                            <Image cursor={"pointer"} height={"36px"} width={"36px"} onClick={handleOpenUserMenu} objectFit={"cover"} borderRadius={"50%"} src={"/assets/profile_default.jpeg"} />
+                                            //  <IconButton _hover={{ color: "#3394d7" }} bg={"#fff"} icon={<IconUserCircle size={"30px"} />} onClick={handleOpenUserMenu} />
+                                        )
+                                    }
+
                                 </>
-                               
-                               
+
+
                             ) : (
                                 <>
                                     <Button as={"a"} href={"/login"} className={`${poppins.className}`} fontSize={'sm'} _hover={{ color: "#000" }} fontWeight={400} variant={'link'}>
@@ -166,10 +171,10 @@ export default function Navbar({ access_token, refresh_token, LogoutAccount }) {
                             Profile
                         </Text>
                         <Divider />
-                        <Text _hover={{ color: "#3394d7", fontWeight: 500, cursor: "pointer" }} 
-                        fontWeight={400} 
-                        className={`${roboto.className}`}
-                        onClick={handleLogoutAccount}>Logout</Text>
+                        <Text _hover={{ color: "#3394d7", fontWeight: 500, cursor: "pointer" }}
+                            fontWeight={400}
+                            className={`${roboto.className}`}
+                            onClick={handleLogoutAccount}>Logout</Text>
                     </VStack>
                 </Box>
             </Container>
