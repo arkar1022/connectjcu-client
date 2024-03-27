@@ -36,6 +36,7 @@ const Login = ({ LoginAccount, prev }) => {
             //     router.back(); 
             //   }
         } else {
+            console.log(res.api)
             setIsErrorMsg(res.message)
         }
     }
