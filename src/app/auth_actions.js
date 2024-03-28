@@ -102,8 +102,8 @@ export async function LogoutAccount() {
 		if (!res.ok) {
 			return false
 		}
-		cookies().delete('_access')
 		cookies().delete('_refresh')
+		cookies().delete('_access')
 		return true
 	}
 	catch {
