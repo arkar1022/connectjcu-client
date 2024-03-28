@@ -70,7 +70,13 @@ export default function Profile({ res }) {
                                 src={user.profile_image} />
                             <IconButton
                                 onClick={() => setIsImageModalOpen(true)}
-                                _hover={{ background: "none", color: "#3394d7" }} minW={0} minHeight={0} background={"none"} pos={"absolute"} bottom={"2px"} right={"2px"} icon={<IconEdit />} />
+                                _hover={{ background: "none", color: "#3394d7" }} 
+                                minW={0} minHeight={0} 
+                                background={"none"} 
+                                pos={"absolute"} 
+                                bottom={{base:"-8px",md:"2px"}} 
+                                right={{base:"-10px", md:"2px"}} 
+                                icon={<IconEdit />} />
                         </Box>
                         <VStack spacing={4} alignItems={"flex-start"}>
                             <HStack fontSize={{ base: "16px", md: "20px" }} gap={"40px"}>
@@ -108,7 +114,7 @@ export default function Profile({ res }) {
                         <Box textAlign="center">
                             <Image objectFit={"cover"} objectPosition={"center"} borderRadius={"50%"} width={"200px"} height={"200px"} src={selectedImage ? selectedImage : user.profile_image} alt="Selected Image" />
                         </Box>
-                        <input ref={fileInputRef} style={{ display: "none" }} type="file" onChange={handleImageChange} />
+                        <input accept=".jpg, .jpeg, .png" ref={fileInputRef} style={{ display: "none" }} type="file" onChange={handleImageChange} />
                         <Button onClick={handleButtonClick}>Choose Image</Button>
                     </ModalBody>
                     <ModalFooter>
