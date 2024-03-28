@@ -1,12 +1,10 @@
 'use client'
-import { Select,Input, InputGroup, InputRightElement, Container, Text, Box, Image, HStack, useStatStyles, Grid } from "@chakra-ui/react"
+import { Select, Input, InputGroup, InputRightElement, Container, Text, Box, Image, HStack, useStatStyles, Grid, Spinner } from "@chakra-ui/react"
 import { poppins, jomhuria, roboto, michroma, plus_jakarta } from "../fonts";
 import { IconSearch } from "@tabler/icons-react";
 import { useEffect, useState } from "react";
 import BlogCard from "../components/blog-card/BlogCard";
-import { FetchBlogs } from "../blog_actions";
-import { FetchCategories } from "../category_actions";
-const Blog = () => {
+const Blog = ({ blogResponse, catResponse }) => {
     const [categories, setCategories] = useState(null)
     const [blogs, setBlogs] = useState(null)
     const [selectedCategory, setSelectedCategory] = useState("")
@@ -18,23 +16,17 @@ const Blog = () => {
     }
 
     useEffect(() => {
-        const FetchData = async () => {
-            const blogResponse = await FetchBlogs()
-            const catResponse = await FetchCategories()
-
-            if (blogResponse.success && catResponse.success) {
-                setBlogs(blogResponse.data)
-                setCategories(catResponse.data)
-            }
+        if (blogResponse.success && catResponse.success) {
+            setBlogs(blogResponse.data)
+            setCategories(catResponse.data)
         }
-        FetchData()
         setIsClient(true)
-    },[])
+    }, [])
 
     const handleSortOnChange = (e) => {
         setSelectedSort(e.target.value)
     }
-    return isClient &&  (
+    return isClient && (
         <Container maxW="96em" my={8}>
             <Box position={"relative"}>
                 <Image filter={"brightness(0.4)"} borderRadius={"10px"} src="/assets/blog_banner.jpeg" height={{ base: "250", md: "400px" }} width={"100%"} objectFit={"cover"} />
@@ -42,37 +34,38 @@ const Blog = () => {
                     BLOG
                 </Text>
             </Box>
-            <HStack flexDir={{base:"column", md:"row"}} my={4}>
+            <HStack flexDir={{ base: "column", md: "row" }} my={4}>
                 <HStack justifyContent={"space-between"} w={"100%"}>
-                <Select value={selectedCategory} w={"100%"} placeholder="All Category" onChange={handleCategoryOnChange}>
-                    {
-                        categories?.map((category,index) => (
-                            <option key={index} value={category.id}>{category.name}</option>
-                        ))
-                    }
-                </Select>
-       
-                <Select value={selectedSort} w={"100%"} placeholder="" onChange={handleSortOnChange}>
-                    <option value="-date">Recent</option>
-                    <option value="date">Older</option>
-                </Select>
+                    <Select value={selectedCategory} w={"100%"} placeholder="All Category" onChange={handleCategoryOnChange}>
+                        {
+                            categories?.map((category, index) => (
+                                <option key={index} value={category.id}>{category.name}</option>
+                            ))
+                        }
+                    </Select>
+
+                    <Select value={selectedSort} w={"100%"} placeholder="" onChange={handleSortOnChange}>
+                        <option value="-date">Recent</option>
+                        <option value="date">Older</option>
+                    </Select>
                 </HStack>
                 <InputGroup>
                     <Input placeholder='Search' />
-                    <InputRightElement _hover={{cursor:"pointer"}}>
+                    <InputRightElement _hover={{ cursor: "pointer" }}>
                         <IconSearch />
                     </InputRightElement>
                 </InputGroup>
             </HStack>
-            <Grid my={6} sx={{ 
+            <Grid my={6} sx={{
                 gridTemplateColumns: { base: "repeat(1, 1fr)", sm: "repeat(2,1fr)", md: "repeat(3,1fr)", lg: "repeat(4,1fr)" },
-                gap: { base: "10px", md: "16px" },}}>
-                    {
-                        blogs?.map((blog,index) => (
-                            <BlogCard key={index} blog={blog}/>
-                        ))
-                    }
-  
+                gap: { base: "10px", md: "16px" },
+            }}>
+                {
+                    blogs?.map((blog, index) => (
+                        <BlogCard key={index} blog={blog} />
+                    ))
+                }
+
             </Grid>
         </Container>
     )
