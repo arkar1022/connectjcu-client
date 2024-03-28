@@ -38,7 +38,7 @@ export default function Navbar({ access_token, refresh_token, LogoutAccount }) {
     const router = useRouter();
     const { setAuth, isAuth, userInfo, setUserInfo } = authStore((state) => state);
     const [isClient, setIsClient] = useState(false)
-    const [isOpenUserMenu, setIsOpenUserMenu] = useState(true)
+    const [isOpenUserMenu, setIsOpenUserMenu] = useState(false)
     const pathname = usePathname()
     const handleOpenUserMenu = () => {
         onClose()
@@ -189,7 +189,7 @@ export default function Navbar({ access_token, refresh_token, LogoutAccount }) {
                                 <Text _hover={{ color: "#3394d7", cursor: "pointer" }}
                                     color={"rgba(0,0,0,0.7)"}
                                     className={`${roboto.className}`}
-                                    onClick={() => router.push('/profile')}
+                                    onClick={() => router.push('/create-post')}
                                 >
                                     Create Post
                                 </Text>

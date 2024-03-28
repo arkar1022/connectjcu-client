@@ -10,7 +10,8 @@ import {
 	Fahkwang,
 	Jomhuria,
 	Plus_Jakarta_Sans,
-	Work_Sans
+	Work_Sans,
+	Source_Serif_4,
 } from "next/font/google";
 
 export const inter = Inter({ subsets: ["latin"] });
@@ -81,6 +82,13 @@ export const fahkwang = Fahkwang({
 export const work_sans = Work_Sans({
 	subsets: ["latin"],
 	variable: "--font-work_sans",
+	display: "swap",
+	weight: ["200", "300", "400", "500", "600", "700"],
+})
+
+export const source_serif_4 = Source_Serif_4({
+	subsets: ["latin"],
+	variable: "--font-source_serif_4",
 	display: "swap",
 	weight: ["200", "300", "400", "500", "600", "700"],
 })
