@@ -28,7 +28,7 @@ import {
     ChevronDownIcon,
     ChevronRightIcon,
 } from '@chakra-ui/icons'
-import { IconUserCircle } from '@tabler/icons-react'
+import { IconUserCircle, IconPencilPlus, IconLogout, IconX } from '@tabler/icons-react'
 import { lato, merriweather_sans, poppins, roboto } from '@/app/fonts'
 import { authStore } from '@/stores/authStore'
 import { GetCookie } from '@/app/auth_actions'
@@ -38,15 +38,19 @@ export default function Navbar({ access_token, refresh_token, LogoutAccount }) {
     const router = useRouter();
     const { setAuth, isAuth, userInfo, setUserInfo } = authStore((state) => state);
     const [isClient, setIsClient] = useState(false)
-    const [isOpenUserMenu, setIsOpenUserMenu] = useState(false)
+    const [isOpenUserMenu, setIsOpenUserMenu] = useState(true)
     const pathname = usePathname()
     const handleOpenUserMenu = () => {
         onClose()
         setIsOpenUserMenu(!isOpenUserMenu)
     }
+
+    useEffect (() => {
+        setIsOpenUserMenu(false)
+    },[pathname])
     useEffect(() => {
         const validate = async () => {
-            const {accessToken, refreshToken} = await GetCookie()
+            const { accessToken, refreshToken } = await GetCookie()
             if (isAuth) {
                 if (!accessToken && !refreshToken) {
                     setAuth(false)
@@ -153,30 +157,58 @@ export default function Navbar({ access_token, refresh_token, LogoutAccount }) {
                 <Collapse sx={{ maxW: "200px" }} in={isOpen} animateOpacity>
                     <MobileNav />
                 </Collapse>
+                {userInfo && (
+                    <Box zIndex={2000} background={"#fff"}
+                        borderRadius={"10px"}
+                        boxShadow={"2px 4px 10px 0px rgba(148,148,148,0.56)"}
+                        pos={"absolute"} bottom={"-160px"} right={"20px"}
+                        display={isOpenUserMenu ? "block" : "none"}
+                        width={"200px"}>
+                        <VStack padding={4} pos={"relative"} spacing={"10px"} alignItems={"flex-start"}>
+                            <IconButton onClick={() => setIsOpenUserMenu(false)} minW={"0px"} maxH={"0px"} pos={"absolute"} background={"none"} padding={"0px !important"} top={"13px"} right={"7px"} icon={<IconX size={"18px"} />} />
+                            <HStack spacing={3}>
+                                <Image borderRadius={"50%"} width={"40px"} height={"40px"} src={userInfo?.image} />
+                                <VStack alignItems={"flex-start"} spacing={"none"}>
+                                    <Text _hover={{ color: "#3394d7", cursor: "pointer" }}
+                                        fontWeight={pathname === "/profile" ? 500 : 400}
+                                        color={pathname === "/profile" ? "#3394d7" : "#000"}
+                                        className={`${roboto.className}`}
+                                        onClick={() => router.push('/profile')}
 
-                <Box zIndex={2000} background={"#fff"}
-                    borderRadius={"10px"} p={4}
-                    boxShadow={"2px 4px 10px 0px rgba(148,148,148,0.56)"}
-                    pos={"absolute"} bottom={"-80px"} right={"20px"}
-                    display={isOpenUserMenu ? "block" : "none"}
-                    width={"150px"}>
-                    <VStack spacing={"10px"} alignItems={"flex-start"}>
-                        <Text _hover={{ color: "#3394d7", fontWeight: 500, cursor: "pointer" }}
-                            fontWeight={pathname === "/profile" ? 500 : 400}
-                            color={pathname === "/profile" ? "#3394d7" : "#000"}
-                            className={`${roboto.className}`}
-                            onClick={() => router.push('/profile')}
+                                    >
+                                        {userInfo.full_name.length > 14 ? userInfo.first_name : userInfo.full_name}
+                                    </Text>
+                                    <Text color={"rgba(0,0,0,0.5)"} fontSize={"10px"}>
+                                        Account
+                                    </Text>
+                                </VStack>
+                            </HStack>
+                            <Divider />
+                            <HStack _hover={{ color: "#3394d7", cursor: "pointer" }} color={"rgba(0,0,0,0.6)"} spacing={3}>
+                                <IconPencilPlus />
+                                <Text _hover={{ color: "#3394d7", cursor: "pointer" }}
+                                    color={"rgba(0,0,0,0.7)"}
+                                    className={`${roboto.className}`}
+                                    onClick={() => router.push('/profile')}
+                                >
+                                    Create Post
+                                </Text>
+                            </HStack>
+                            <Divider />
+                            <HStack _hover={{ color: "#3394d7", cursor: "pointer" }} color={"rgba(0,0,0,0.6)"} spacing={3}>
+                                <IconLogout />
+                                <Text _hover={{ color: "#3394d7", cursor: "pointer" }}
+                                    color={"rgba(0,0,0,0.7)"}
+                                    className={`${roboto.className}`}
+                                    onClick={() => { handleLogoutAccount(); setIsOpenUserMenu(false); }}
+                                >
+                                    Logout
+                                </Text>
+                            </HStack>
+                        </VStack>
+                    </Box>
+                )}
 
-                        >
-                            Profile
-                        </Text>
-                        <Divider />
-                        <Text _hover={{ color: "#3394d7", fontWeight: 500, cursor: "pointer" }}
-                            fontWeight={400}
-                            className={`${roboto.className}`}
-                            onClick={handleLogoutAccount}>Logout</Text>
-                    </VStack>
-                </Box>
             </Container>
         </Box>
     )

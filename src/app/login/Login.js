@@ -30,11 +30,6 @@ const Login = ({ LoginAccount }) => {
             setUserInfo({first_name:data.first_name,full_name:data.full_name,email:data.email,image:data.profile_image})
             router.refresh()
             router.push('/')
-            // if (prev.startsWith('/email-verification/')) {
-            //     router.push('/');
-            //   } else {
-            //     router.back(); 
-            //   }
         } else {
             setIsErrorMsg(res.message)
         }
