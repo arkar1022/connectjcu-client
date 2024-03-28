@@ -69,7 +69,7 @@ const Blog = () => {
                 gap: { base: "10px", md: "16px" },}}>
                     {
                         blogs?.map((blog,index) => (
-                            <BlogCard blog={blog}/>
+                            <BlogCard key={index} blog={blog}/>
                         ))
                     }
   
