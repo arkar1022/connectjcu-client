@@ -29,7 +29,7 @@ const Resources = ({ resourceResponse, catResponse }) => {
     return isClient && (
         <Container maxW="96em" my={8}>
             <Box position={"relative"}>
-                <Image filter={"brightness(0.4)"} borderRadius={"10px"} src="/assets/blog_banner.jpeg" height={{ base: "250", md: "400px" }} width={"100%"} objectFit={"cover"} />
+                <Image filter={"brightness(0.4)"} borderRadius={"10px"} src="/assets/resource_banner.jpg" height={{ base: "250", md: "400px" }} width={"100%"} objectFit={"cover"} />
                 <Text fontSize={{ base: "40px", md: "70px" }} fontWeight={700} className={`${roboto.className}`} color={"#fff"} position={"absolute"} top={"50%"} left={"50%"} transform={"translate(-50%, -50%)"}>
                     RESOURCE
                 </Text>
