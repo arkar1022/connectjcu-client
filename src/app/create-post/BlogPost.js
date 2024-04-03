@@ -16,10 +16,17 @@ export default function BlogPost({categories}) {
     const [title, setTitle] = useState('')
     const fileInputRef = useRef(null);
     const [selectedCategory, setSelectedCategory] = useState("")
+    const [error, SetError] = useState(false)
 
     const router = useRouter()
 
     const handleSubmitBlog = async () => {
+
+        SetError(false)
+        if (!title || !content || !selectedImageFile || !selectedCategory) {
+            SetError(true)
+            return
+        }
         const formDataBlog = new FormData();
         formDataBlog.append('title', title);
         formDataBlog.append('content', content);
@@ -55,9 +62,16 @@ export default function BlogPost({categories}) {
         <Box>
             <HStack justifyContent={"space-between"} mb={6}>
                 <Text fontWeight={800} fontSize={{ base: "18px", md: "22px" }} className={`${work_sans.className}`}>Create New Blog</Text>
-                <form action={() => handleSubmitBlog()}>
-                    <PostBlogBtn />
-                </form>
+                <HStack justifyContent={"flex-end"}>
+                    {error && (
+                        <Text color={"red"} fontSize={{ base: "12px", md: "16px" }} className={`${work_sans.className}`}>
+                            Please Fill All Information
+                            </Text>
+                    )}
+                    <form action={() => handleSubmitBlog()}>
+                        <PostBlogBtn />
+                    </form>
+                </HStack>
             </HStack>
             <Input value={title} onChange={handleTitleOnChange} mb={6} placeholder='Title' />
             <Select onChange={handleCategoryOnChange} value={selectedCategory} mb={6} placeholder='Select Category'>
