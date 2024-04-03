@@ -223,17 +223,19 @@ const DesktopNav = () => {
     return (
         <Stack direction={'row'} spacing={10} justifyContent={"center"} alignItems={"center"}>
             {NAV_ITEMS.map((navItem) => (
-                <Box borderBottom={pathname === navItem.href ? "3px solid #3394d7" : "none"} key={navItem.label}>
+                <Box borderBottom={pathname === navItem.href.split('?')[0] ? "3px solid #3394d7" : "none"} key={navItem.label}>
                     <Popover trigger={'hover'} placement={'bottom-start'}>
                         <PopoverTrigger>
                             <Box
+                           
                                 as='a'
                                 width={"fit-content"}
                                 p={2}
                                 // href={navItem.href ?? '#'}
                                 onClick={() => router.push(navItem.href)}
-                                fontWeight={pathname === navItem.href ? 700 : 500}
-                                color={pathname === navItem.href ? "#3394d7" : linkColor}
+                              
+                                fontWeight={pathname === navItem.href.split('?')[0] ? 700 : 500}
+                                color={pathname === navItem.href.split('?')[0] ? "#3394d7" : linkColor}
                                 lineHeight={2}
                                 className={`${poppins.className}`}
                                 fontSize={'16px'}
@@ -372,7 +374,7 @@ const NAV_ITEMS = [
     },
     {
         label: 'Blog',
-        href: '/blog',
+        href: '/blog?sort=-created_at&category=&search=',
     },
     {
         label: 'Resoruces',

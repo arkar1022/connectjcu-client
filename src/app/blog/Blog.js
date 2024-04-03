@@ -1,19 +1,46 @@
 'use client'
-import { Select, Input, InputGroup, InputRightElement, Container, Text, Box, Image, HStack, useStatStyles, Grid, Spinner } from "@chakra-ui/react"
+import { Select, Input, InputGroup, InputRightElement, Container, Text, Box, Image, HStack, useStatStyles, Grid, Spinner, slideFadeConfig } from "@chakra-ui/react"
 import { poppins, jomhuria, roboto, michroma, plus_jakarta } from "../fonts";
 import { IconSearch } from "@tabler/icons-react";
 import { useEffect, useState } from "react";
 import BlogCard from "../components/blog-card/BlogCard";
+import { useRouter } from "next/navigation";
 const Blog = ({ blogResponse, catResponse }) => {
     const [categories, setCategories] = useState(null)
     const [blogs, setBlogs] = useState(null)
     const [selectedCategory, setSelectedCategory] = useState("")
-    const [selectedSort, setSelectedSort] = useState("-date")
+    const [selectedSort, setSelectedSort] = useState("-created_at")
+    const [search, setSearch] = useState("")
+    const [searchValue, setSearchValue] = useState("")
     const [isClient, setIsClient] = useState(false)
+    const AsTitle = "Title (A -> Z)"
+    const DeTitle = "Title (Z -> A)"
+    const router = useRouter()
 
+    const handleSearchOnClick  = (e) => {
+        setSearch(searchValue)
+    }
+
+    const handleKeyDown = (e) => {
+        console.log(e.key)
+        if (e.key === 'Enter') {
+            handleSearchOnClick()
+        }
+      };
+
+    const handleSearchOnChange  = (e) => {
+        e.preventDefault()
+        setSearchValue(e.target.value)
+    }
+    
     const handleCategoryOnChange = (e) => {
+        e.preventDefault()
         setSelectedCategory(e.target.value)
     }
+    useEffect(() => {
+        router.push(`?sort=${selectedSort}&category=${selectedCategory}&search=${search}`)
+    }, [selectedCategory, selectedSort, search ])
+    
 
     useEffect(() => {
         if (blogResponse.success && catResponse.success) {
@@ -21,7 +48,7 @@ const Blog = ({ blogResponse, catResponse }) => {
             setCategories(catResponse.data)
         }
         setIsClient(true)
-    }, [])
+    }, [blogResponse])
 
     const handleSortOnChange = (e) => {
         setSelectedSort(e.target.value)
@@ -45,13 +72,16 @@ const Blog = ({ blogResponse, catResponse }) => {
                     </Select>
 
                     <Select value={selectedSort} w={"100%"} placeholder="" onChange={handleSortOnChange}>
-                        <option value="-date">Recent</option>
-                        <option value="date">Older</option>
+                        <option value="-created_at">Recent</option>
+                        <option value="created_at">Older</option>
+                        <option value="-view_count">Popular</option>
+                        <option value="title">{AsTitle}</option>
+                        <option value="-title">{DeTitle}</option>
                     </Select>
                 </HStack>
                 <InputGroup>
-                    <Input placeholder='Search' />
-                    <InputRightElement _hover={{ cursor: "pointer" }}>
+                    <Input onKeyDown={handleKeyDown}  onChange={handleSearchOnChange} placeholder='Search' />
+                    <InputRightElement onClick={() => handleSearchOnClick()}  _hover={{ cursor: "pointer" }}>
                         <IconSearch />
                     </InputRightElement>
                 </InputGroup>

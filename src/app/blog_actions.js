@@ -1,9 +1,9 @@
 'use server';
 import { cookies } from "next/headers";
-export async function FetchBlogs() {
+export async function FetchBlogs(search, category, sort) {
     try {
         const access_token = cookies().get('_access')?.value
-        const res = await fetch(`${process.env.API_URL}/api/v1/blogs`, {
+        const res = await fetch(`${process.env.API_URL}/api/v1/blogs/?sort=${sort?sort:""}&category=${category?category:""}&search=${search?search:""}`, {
             method: 'GET',
             headers: {
                 "Authorization": `Bearer ${access_token}`
@@ -16,7 +16,7 @@ export async function FetchBlogs() {
             return { "success": false, "message": "Fail to Get Blogs"};
         }
 
-        console.log("blog response -> ", data)
+        // console.log("blog response -> ", data)
         return { "success": true, data }
     }
     catch(error){
@@ -41,7 +41,7 @@ export async function FetchDetailBlog(blog_id) {
             return { "success": false, "message": "Fail to Get Blogs"};
         }
 
-        console.log("blog response -> ", data)
+        // console.log("blog response -> ", data)
         return { "success": true, data }
     }
     catch(error){
@@ -68,7 +68,7 @@ export async function SubmitBlog(formData) {
 			return { "success": false, "message": "Fail to Submit Blog"};
 		}
 
-		console.log("Blog resposne:", data)
+		// console.log("Blog resposne:", data)
 		return { "success": true, data }
 	}
 	catch(error){
@@ -95,7 +95,7 @@ export async function UpdateBlog(id,formData) {
 			return { "success": false, "message": "Fail to Submit Blog"};
 		}
 
-		console.log("Blog resposne:", data)
+		// console.log("Blog resposne:", data)
 		return { "success": true, data }
 	}
 	catch(error){
