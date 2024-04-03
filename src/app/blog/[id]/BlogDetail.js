@@ -1,13 +1,15 @@
 'use client'
 import { source_serif_4, work_sans } from "@/app/fonts";
-import { Container, VStack, Image, Text, HStack, Box } from "@chakra-ui/react";
+import { Container, VStack, Image, Text, HStack, Box, IconButton } from "@chakra-ui/react";
 import { decode } from 'html-entities';
 import { useEffect, useState } from "react";
-
+import { IconEdit } from "@tabler/icons-react";
+import { useRouter } from "next/navigation";
 import { IconHeartFilled, IconEye } from "@tabler/icons-react";
 export default function BlogDetail({res}) {
     const [isClient, setIsClient] = useState(false)
     const [blog, setBlog] = useState(null)
+    const router = useRouter()
 
     const formatDate = (dateString) => {
         const date = new Date(dateString);
@@ -25,9 +27,17 @@ export default function BlogDetail({res}) {
     return isClient &&  (
         <Container my={14} maxW={"96em"} display={"flex"} flexDir={"row"}>
             <VStack spacing={8} alignItems={"flex-start"} width={"100%"}>
+            <HStack alignItems={"center"} width={"100%"} justifyContent={"space-between"}>
                 <Text fontWeight={600} color={"#181A2A"} fontSize={{ base: "28px", md: "35px" }} className={`${work_sans.className}`}>
                     {blog.title}
                 </Text>
+                {
+                    blog.is_owner && (
+                        <IconButton onClick={() => router.push(`/edit-post/blog/${blog.id}`) } _hover={{color:"#3394d7"}} icon={<IconEdit />} background={"none"} />
+                    )
+                }
+          
+            </HStack>
                 <HStack alignItems={"center"} width={"100%"} justifyContent={"space-between"}>
                     <HStack spacing={{ base: 2, md: 4 }} justifyContent={"flex-start"}>
                         <Image height={"36px"} width={"36px"} objectFit={"cover"} borderRadius={"50%"} src={`https://www.connectjcu.club/media/${blog.author.profile_image}`} />
