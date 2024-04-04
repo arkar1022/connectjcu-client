@@ -29,7 +29,7 @@ export default function BlogDetail({ res }) {
     }
 
     const handleSubmitComment = async () => {
-        if (!commentTxt){
+        if (!commentTxt) {
             return
         }
         const response = await SubmitBlogComment(res?.data?.id, commentTxt)
@@ -37,7 +37,7 @@ export default function BlogDetail({ res }) {
             setCommentTxt('')
             handleFetchComment()
         }
-        
+
     }
 
     const formatDate = (dateString) => {
@@ -102,17 +102,35 @@ export default function BlogDetail({ res }) {
                 <Text className={`${open_sans.className}`} fontSize={{ base: "22px", md: "26px" }}>
                     Comments
                 </Text>
-                <Box maxW={"600px"}>
-                    {
-                        comments?.map((comment,index) => (
-                            <Comment comment={comment} />
-                        ))
-                    }
+                <Box width={"100%"} maxW={"600px"}>
+                    <Box overflowY={"auto"} maxH={"500px"} width={"100%"} maxW={"600px"}
+                    overflowX={"hidden"}
+                    css={{
+                        '&::-webkit-scrollbar': {
+							width: '3px',
+						},
+						'&::-webkit-scrollbar-track': {
+							width: '5px',
+						},
+						'&::-webkit-scrollbar-thumb': {
+							backgroundColor: 'darkgrey',
+							outline: '1px solid slategrey',
+						},
+                    }}
                     
+                    >
+                        {
+                            comments?.map((comment, index) => (
+                                <Comment key={index} comment={comment} />
+                            ))
+                        }
+
+
+                    </Box>
                     <InputGroup>
                         <Textarea
-                        value={commentTxt}
-                        onChange={handleTextOnChange}
+                            value={commentTxt}
+                            onChange={handleTextOnChange}
                             placeholder='Write Comment'
                             resize="vertical" // Allows vertical resize
                         />
