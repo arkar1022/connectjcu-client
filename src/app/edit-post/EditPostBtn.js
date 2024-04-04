@@ -1,7 +1,7 @@
 'use client';
 import { Button, Spinner } from "@chakra-ui/react";
 import { useFormStatus } from "react-dom";
-const EditBlogBtn = () => {
+const EditPostBtn = () => {
     const { pending } = useFormStatus();
     return (
 
@@ -11,4 +11,4 @@ const EditBlogBtn = () => {
     )
 }
 
-export default EditBlogBtn
+export default EditPostBtn

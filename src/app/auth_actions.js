@@ -99,9 +99,9 @@ export async function LogoutAccount() {
 			}),
 		})
 		const data = await res.json();
-		if (!res.ok) {
-			return false
-		}
+		// if (!res.ok) {
+		// 	return false
+		// }
 		cookies().delete('_refresh')
 		cookies().delete('_access')
 		return true

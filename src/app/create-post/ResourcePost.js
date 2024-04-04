@@ -1,5 +1,5 @@
 'use client'
-import { Container, Text, Box, Input, HStack, Select, Stack, Button, Image, VStack, useTimeout, useStatStyles } from "@chakra-ui/react";
+import { Container, useToast, Text, Box, Input, HStack, Select, Stack, Button, Image, VStack, useTimeout, useStatStyles } from "@chakra-ui/react";
 import { work_sans } from "../fonts";
 import dynamic from "next/dynamic";
 import 'react-quill/dist/quill.snow.css';
@@ -23,6 +23,8 @@ export default function ResourcePost({ categories }) {
     const [error, SetError] = useState(false)
     const router = useRouter()
 
+    const toast = useToast()
+
     const handleSubmitResource = async () => {
 
         SetError(false)
@@ -39,7 +41,14 @@ export default function ResourcePost({ categories }) {
         formDataResource.append('file', selectedFile);
         const res = await SubmitResource(formDataResource)
         if (res.success) {
-            router.push("/resources")
+            toast({
+                title: 'Successfully Added.',
+                description: "We've added your resource.",
+                status: 'success',
+                duration: 3000, // 5 seconds
+                isClosable: true,
+            });
+                router.push("/resources")
         }
     }
 
@@ -129,28 +138,6 @@ export default function ResourcePost({ categories }) {
             </Stack>
             <Text my={5} fontWeight={600} fontSize={{ base: "16px", md: "18" }} className={`${work_sans.className}`}>Write Description</Text>
             <ReactQuill theme="snow" value={content} onChange={setContent} />
-            {/* <Input value={title} onChange={handleTitleOnChange} mb={6} placeholder='Title' />
-            <Select onChange={handleCategoryOnChange} value={selectedCategory} mb={6} placeholder='Select Category'>
-                {categories?.map((category,index) => (
-                         <option key={index} value={category.id}>{category.name}</option>
-                ))}
-            </Select>
-            {
-                selectedImage ? (
-                    <Image mb={6} src={selectedImage}
-                        maxHeight={{ base: "462px", md: "600px" }} borderRadius={"15px"}
-                        width={"100%"} objectFit={"cover"} objectPosition={"center"} />
-                ) : (
-                    <VStack mb={6} alignItems={"center"} justifyContent={"center"} height={"400px"} border={"1px solid black"}>
-                        <Text color={"rgba(0,0,0,0.2)"} fontWeight={700}>NO COVER PHOTO</Text>
-                    </VStack>
-                )
-            }
-
-            <input accept=".jpg, .jpeg, .png" ref={imageInputRef} style={{ display: "none" }} type="file" onChange={handleImageChange} />
-            <Button mb={6} onClick={handleButtonClick}>Upload Cover Photo</Button>
-
-            <ReactQuill theme="snow" value={content} onChange={setContent} /> */}
         </Box>
     )
 }

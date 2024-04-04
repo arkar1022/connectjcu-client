@@ -65,10 +65,37 @@ export async function SubmitResource(formData) {
 		const data = await res.json();
 		if (!res.ok) {
 			console.log("Error:", data);
-			return { "success": false, "message": "Fail to Submit Blog"};
+			return { "success": false, "message": "Fail to Submit Resource"};
 		}
 
-		console.log("Blog resposne:", data)
+		console.log("Resource resposne:", data)
+		return { "success": true, data }
+	}
+	catch(error){
+        console.log(error)
+		return { "success": false, "message": "Fail API" }
+	}
+}
+
+export async function UpdateResource(id,formData) {
+	try {
+        const access_token = cookies().get('_access')?.value
+		const res = await fetch(`${process.env.API_URL}/api/v1/resources/${id}/`, {
+			method: 'PUT',
+			headers: {
+				"Authorization": `Bearer ${access_token}`
+			},
+			cache: 'no-store',
+			body: formData,
+		})
+        console.log("blog res",res)
+		const data = await res.json();
+		if (!res.ok) {
+			console.log("Error:", data);
+			return { "success": false, "message": "Fail to Submit Resource"};
+		}
+
+		console.log("Resource resposne:", data)
 		return { "success": true, data }
 	}
 	catch(error){

@@ -1,5 +1,5 @@
 'use client'
-import { Container, Text, Box, Input, HStack, Select, Button, Image, VStack, useTimeout } from "@chakra-ui/react";
+import { Container, useToast, Text, Box, Input, HStack, Select, Button, Image, VStack, useTimeout } from "@chakra-ui/react";
 import { work_sans } from "../fonts";
 import dynamic from "next/dynamic";
 import 'react-quill/dist/quill.snow.css';
@@ -20,6 +20,8 @@ export default function BlogPost({categories}) {
 
     const router = useRouter()
 
+    const toast = useToast()
+
     const handleSubmitBlog = async () => {
 
         SetError(false)
@@ -34,7 +36,14 @@ export default function BlogPost({categories}) {
         formDataBlog.append('category', selectedCategory);
         const res = await SubmitBlog(formDataBlog)
         if (res.success) {
-            router.push("/blog")
+            toast({
+                title: 'Successfully Added.',
+                description: "We've added your blog.",
+                status: 'success',
+                duration: 3000, // 5 seconds
+                isClosable: true,
+            });
+                router.push("/blog")
         }
     }
 

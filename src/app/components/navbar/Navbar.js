@@ -377,7 +377,7 @@ const NAV_ITEMS = [
         href: '/blog?sort=-created_at&category=&search=',
     },
     {
-        label: 'Resoruces',
+        label: 'Resources',
         href: '/resources',
     },
     {

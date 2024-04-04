@@ -1,12 +1,12 @@
 'use client'
-import { Container, Text, Box, Input, HStack, Select, Button, Image, VStack, useTimeout } from "@chakra-ui/react";
+import { Container, useToast, Text, Box, Input, HStack, Select, Button, Image, VStack, useTimeout } from "@chakra-ui/react";
 import { work_sans } from "@/app/fonts";
 import dynamic from "next/dynamic";
 import 'react-quill/dist/quill.snow.css';
 import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { UpdateBlog } from "@/app/blog_actions";
-import EditBlogBtn from "../../PostBlogBtn";
+import EditPostBtn from "../../EditPostBtn";
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
@@ -21,7 +21,7 @@ export default function EditBlog({ resCat, resBlog, id }) {
     const [selectedCategory, setSelectedCategory] = useState(resBlog?.data?.category.id)
     const [error, SetError] = useState(false)
     const [isClient, setIsClient] = useState(false)
-
+    const toast = useToast()
     const router = useRouter()
 
     useEffect(() => {
@@ -50,7 +50,14 @@ export default function EditBlog({ resCat, resBlog, id }) {
         formDataBlog.append('category', selectedCategory);
         const res = await UpdateBlog(id,formDataBlog)
         if (res.success) {
-            router.push("/blog")
+            toast({
+                title: 'Successfully Updated.',
+                description: "We've updated your blog.",
+                status: 'success',
+                duration: 3000, // 5 seconds
+                isClosable: true,
+            });
+                router.push("/blog")
         }
     }
 
@@ -86,7 +93,7 @@ export default function EditBlog({ resCat, resBlog, id }) {
                             </Text>
                         )}
                         <form action={() => handleSubmitBlog()}>
-                            <EditBlogBtn />
+                            <EditPostBtn />
                         </form>
                     </HStack>
                 </HStack>
