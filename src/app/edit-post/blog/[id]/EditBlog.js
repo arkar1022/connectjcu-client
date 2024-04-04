@@ -5,9 +5,9 @@ import dynamic from "next/dynamic";
 import 'react-quill/dist/quill.snow.css';
 import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { UpdateBlog } from "@/app/blog_actions";
+import { UpdateBlog, DeleteBlog } from "@/app/blog_actions";
 import EditPostBtn from "../../EditPostBtn";
-
+import DeletePostBtn from "../../DeletePostBtn";
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
 
@@ -57,7 +57,21 @@ export default function EditBlog({ resCat, resBlog, id }) {
                 duration: 3000, // 5 seconds
                 isClosable: true,
             });
-                router.push("/blog")
+                router.push("/blog?sort=-created_at&category=&search=")
+        }
+    }
+
+    const handleDeleteBlog = async () => {
+        const res = await DeleteBlog(id)
+        if (res.success) {
+            toast({
+                title: 'Successfully Deleted.',
+                description: "We've deleted your blog.",
+                status: 'success',
+                duration: 3000, // 5 seconds
+                isClosable: true,
+            });
+                router.push("/blog?sort=-created_at&category=&search=")
         }
     }
 
@@ -86,12 +100,15 @@ export default function EditBlog({ resCat, resBlog, id }) {
             <Box>
                 <HStack justifyContent={"space-between"} mb={6}>
                     <Text fontWeight={800} fontSize={{ base: "18px", md: "22px" }} className={`${work_sans.className}`}>Create New Blog</Text>
-                    <HStack justifyContent={"flex-end"}>
+                    <HStack pb={6} pos={"relative"} justifyContent={"flex-end"}>
                         {error && (
-                            <Text color={"red"} fontSize={{ base: "12px", md: "16px" }} className={`${work_sans.className}`}>
-                                Please Fill All Information
+                            <Text bottom={"0px"} right={"0px"} pos={"absolute"} color={"red"} fontSize={{ base: "12px", md: "12px" }} className={`${work_sans.className}`}>
+                                Pls Fill All Information
                             </Text>
                         )}
+                        <form action={() => handleDeleteBlog()}>
+                            <DeletePostBtn />
+                        </form>
                         <form action={() => handleSubmitBlog()}>
                             <EditPostBtn />
                         </form>

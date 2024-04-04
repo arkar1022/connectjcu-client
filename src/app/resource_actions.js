@@ -103,3 +103,27 @@ export async function UpdateResource(id,formData) {
 		return { "success": false, "message": "Fail API" }
 	}
 }
+
+export async function DeleteResource(id) {
+	try {
+        const access_token = cookies().get('_access')?.value
+		const res = await fetch(`${process.env.API_URL}/api/v1/resources/${id}/`, {
+			method: 'DELETE',
+			headers: {
+				"Authorization": `Bearer ${access_token}`
+			},
+			cache: 'no-store',
+		})
+
+		if (res.status != 204) {
+			return { "success": false, "message": "Fail to Delete Resource"};
+		}
+
+		// console.log("Blog resposne:", data)
+		return { "success": true}
+	}
+	catch(error){
+
+		return { "success": false, "message": "Fail API" }
+	}
+}

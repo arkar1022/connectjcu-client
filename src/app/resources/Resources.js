@@ -9,7 +9,7 @@ const Resources = ({ resourceResponse, catResponse }) => {
     const [categories, setCategories] = useState(null)
     const [resources, setResources] = useState(null)
     const [selectedCategory, setSelectedCategory] = useState("")
-    const [selectedSort, setSelectedSort] = useState("-date")
+    const [selectedSort, setSelectedSort] = useState("-created_at")
     const [isClient, setIsClient] = useState(false)
     const [search, setSearch] = useState("")
     const [searchValue, setSearchValue] = useState("")

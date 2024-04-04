@@ -5,8 +5,9 @@ import dynamic from "next/dynamic";
 import 'react-quill/dist/quill.snow.css';
 import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { UpdateResource } from "@/app/resource_actions";
+import { UpdateResource, DeleteResource } from "@/app/resource_actions";
 import EditPostBtn from "../../EditPostBtn";
+import DeletePostBtn from "../../DeletePostBtn";
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 export default function EditResource({ resCat, resRes }) {
@@ -67,6 +68,20 @@ export default function EditResource({ resCat, resRes }) {
         }
     }
 
+    const handleDeleteResource = async () => {
+        const res = await DeleteResource(resRes.data.id)
+        if (res.success) {
+            toast({
+                title: 'Successfully Deleted.',
+                description: "We've deleted your resource.",
+                status: 'success',
+                duration: 3000, // 5 seconds
+                isClosable: true,
+            });
+                router.push("/resources?sort=-created_at&category=&search=")
+        }
+    }
+
     const handleCategoryOnChange = (e) => {
         setSelectedCategory(e.target.value)
     }
@@ -106,12 +121,15 @@ export default function EditResource({ resCat, resRes }) {
             <Box>
                 <HStack justifyContent={"space-between"} mb={6}>
                     <Text fontWeight={800} fontSize={{ base: "18px", md: "22px" }} className={`${work_sans.className}`}>Create New Resource</Text>
-                    <HStack justifyContent={"flex-end"}>
+                    <HStack pb={6} pos={"relative"} justifyContent={"flex-end"}>
                         {error && (
-                            <Text color={"red"} fontSize={{ base: "12px", md: "16px" }} className={`${work_sans.className}`}>
-                                Please Fill All Information
+                            <Text bottom={"0px"} right={"0px"} pos={"absolute"} color={"red"} fontSize={{ base: "12px", md: "12px" }} className={`${work_sans.className}`}>
+                                Pls Fill All Information
                             </Text>
                         )}
+                        <form action={() => handleDeleteResource()}>
+                            <DeletePostBtn />
+                        </form>
                         <form action={() => handleSubmitResource()}>
                             <EditPostBtn />
                         </form>

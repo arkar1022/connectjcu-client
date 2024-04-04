@@ -103,3 +103,27 @@ export async function UpdateBlog(id,formData) {
 		return { "success": false, "message": "Fail API" }
 	}
 }
+
+export async function DeleteBlog(id) {
+	try {
+        const access_token = cookies().get('_access')?.value
+		const res = await fetch(`${process.env.API_URL}/api/v1/blogs/${id}/`, {
+			method: 'DELETE',
+			headers: {
+				"Authorization": `Bearer ${access_token}`
+			},
+			cache: 'no-store',
+		})
+        console.log("blog res",res)
+		if (res.status != 204) {
+			return { "success": false, "message": "Fail to Delete Blog"};
+		}
+
+		// console.log("Blog resposne:", data)
+		return { "success": true}
+	}
+	catch(error){
+        console.log("We go inside Error")
+		return { "success": false, "message": "Fail API" }
+	}
+}

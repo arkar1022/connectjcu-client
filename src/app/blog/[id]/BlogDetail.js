@@ -23,8 +23,8 @@ export default function BlogDetail({res}) {
         }
         setIsClient(true)
     },[])
-    // const decodedHtml = decode(content.content);
-    return isClient &&  (
+    
+    return isClient && blog &&  (
         <Container my={14} maxW={"96em"} display={"flex"} flexDir={"row"}>
             <VStack spacing={8} alignItems={"flex-start"} width={"100%"}>
             <HStack alignItems={"center"} width={"100%"} justifyContent={"space-between"}>
@@ -71,17 +71,6 @@ export default function BlogDetail({res}) {
                    
                 </Box>
             </VStack>
-            {/* <VStack mt={2} display={{ base: "none", md: "flex" }} width={"200px"} alignItems={"center"}
-                spacing={3} justifyContent={"flex-start"}>
-                <IconHeartFilled size={"32px"} color="#FF5480" />
-                <Text color={"#97989F"} fontSize={"14px"} className={`${work_sans.className}`}>
-                    134
-                </Text>
-                <IconEye size={"32px"} />
-                <Text color={"#97989F"} fontSize={"14px"} className={`${work_sans.className}`}>
-                    167
-                </Text>
-            </VStack> */}
         </Container>
     )
 }
