@@ -1,5 +1,5 @@
 'use client'
-import { Select, Input, InputGroup, InputRightElement, Container, Text, Box, Image, HStack, useStatStyles, Grid, Spinner, slideFadeConfig } from "@chakra-ui/react"
+import { Select, Stack, Input, InputGroup, InputRightElement, Container, Text, Box, Image, HStack, useStatStyles, Grid, Spinner, slideFadeConfig } from "@chakra-ui/react"
 import { poppins, jomhuria, roboto, michroma, plus_jakarta } from "../fonts";
 import { IconSearch } from "@tabler/icons-react";
 import { useEffect, useState } from "react";
@@ -97,6 +97,15 @@ const Blog = ({ blogResponse, catResponse }) => {
                 }
 
             </Grid>
+            {
+                blogs?.length < 1 && (
+                    <Stack>
+                        <Text>
+                            NO BLOG FOUND
+                        </Text>
+                    </Stack>
+                )
+            }
         </Container>
     )
 }

@@ -378,7 +378,7 @@ const NAV_ITEMS = [
     },
     {
         label: 'Resources',
-        href: '/resources',
+        href: '/resources?sort=-created_at&category=&search=',
     },
     {
         label: 'Q/A',

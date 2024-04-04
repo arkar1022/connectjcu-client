@@ -1,19 +1,31 @@
 'use client'
-import { Select, Input, InputGroup, InputRightElement, Container, Text, Box, Image, HStack, useStatStyles, Grid, Spinner } from "@chakra-ui/react"
+import { Select, Input, InputGroup, InputRightElement, Container, Text, Box, Image, HStack, useStatStyles, Grid, Spinner, usePrefersReducedMotion, Stack } from "@chakra-ui/react"
 import { poppins, jomhuria, roboto, michroma, plus_jakarta } from "../fonts";
 import { IconSearch } from "@tabler/icons-react";
 import { useEffect, useState } from "react";
 import ResourceCard from "../components/resource-card/ResourceCard";
+import { useRouter } from "next/navigation";
 const Resources = ({ resourceResponse, catResponse }) => {
     const [categories, setCategories] = useState(null)
     const [resources, setResources] = useState(null)
     const [selectedCategory, setSelectedCategory] = useState("")
     const [selectedSort, setSelectedSort] = useState("-date")
     const [isClient, setIsClient] = useState(false)
+    const [search, setSearch] = useState("")
+    const [searchValue, setSearchValue] = useState("")
+
+    const AsTitle = "Title (A -> Z)"
+    const DeTitle = "Title (Z -> A)"
+
+    const router = useRouter()
 
     const handleCategoryOnChange = (e) => {
         setSelectedCategory(e.target.value)
     }
+
+    useEffect(() => {
+        router.push(`?sort=${selectedSort}&category=${selectedCategory}&search=${search}`)
+    }, [selectedCategory, selectedSort, search ])
 
     useEffect(() => {
         if (resourceResponse.success && catResponse.success) {
@@ -21,7 +33,24 @@ const Resources = ({ resourceResponse, catResponse }) => {
             setCategories(catResponse.data)
         }
         setIsClient(true)
-    }, [])
+    }, [resourceResponse])
+
+
+    const handleSearchOnClick  = (e) => {
+        setSearch(searchValue)
+    }
+
+    const handleKeyDown = (e) => {
+        console.log(e.key)
+        if (e.key === 'Enter') {
+            handleSearchOnClick()
+        }
+      };
+
+    const handleSearchOnChange  = (e) => {
+        e.preventDefault()
+        setSearchValue(e.target.value)
+    }
 
     const handleSortOnChange = (e) => {
         setSelectedSort(e.target.value)
@@ -45,13 +74,16 @@ const Resources = ({ resourceResponse, catResponse }) => {
                     </Select>
 
                     <Select value={selectedSort} w={"100%"} placeholder="" onChange={handleSortOnChange}>
-                        <option value="-date">Recent</option>
-                        <option value="date">Older</option>
+                    <option value="-created_at">Recent</option>
+                        <option value="created_at">Older</option>
+                        <option value="-view_count">Popular</option>
+                        <option value="title">{AsTitle}</option>
+                        <option value="-title">{DeTitle}</option>
                     </Select>
                 </HStack>
                 <InputGroup>
-                    <Input placeholder='Search' />
-                    <InputRightElement _hover={{ cursor: "pointer" }}>
+                    <Input onKeyDown={handleKeyDown}  onChange={handleSearchOnChange} placeholder='Search' />
+                    <InputRightElement onClick={() => handleSearchOnClick()} _hover={{ cursor: "pointer" }}>
                         <IconSearch />
                     </InputRightElement>
                 </InputGroup>
@@ -67,6 +99,15 @@ const Resources = ({ resourceResponse, catResponse }) => {
                 }
 
             </Grid>
+            {
+                resources?.length < 1 && (
+                    <Stack>
+                        <Text>
+                            NO RESOURCE FOUND
+                        </Text>
+                    </Stack>
+                )
+            }
         </Container>
     )
 }
