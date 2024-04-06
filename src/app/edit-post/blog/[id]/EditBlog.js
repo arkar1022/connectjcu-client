@@ -57,7 +57,7 @@ export default function EditBlog({ resCat, resBlog, id }) {
                 duration: 3000, // 5 seconds
                 isClosable: true,
             });
-                router.push("/blog?sort=-created_at&category=&search=")
+                router.push("/blog")
         }
     }
 
@@ -71,7 +71,7 @@ export default function EditBlog({ resCat, resBlog, id }) {
                 duration: 3000, // 5 seconds
                 isClosable: true,
             });
-                router.push("/blog?sort=-created_at&category=&search=")
+                router.push("/blog")
         }
     }
 

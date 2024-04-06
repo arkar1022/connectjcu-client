@@ -51,7 +51,7 @@ export default function EditQna({ resCat, resQna, id }) {
                 duration: 3000, // 5 seconds
                 isClosable: true,
             });
-                router.push("/qna?sort=-created_at&category=&search=")
+                router.push("/qna")
         }
     }
 
@@ -70,7 +70,7 @@ export default function EditQna({ resCat, resQna, id }) {
                 duration: 3000, // 5 seconds
                 isClosable: true,
             });
-                router.push("/qna?sort=-created_at&category=&search=")
+                router.push("/qna")
         }
     }
 

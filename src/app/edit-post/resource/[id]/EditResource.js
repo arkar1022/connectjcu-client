@@ -78,7 +78,7 @@ export default function EditResource({ resCat, resRes }) {
                 duration: 3000, // 5 seconds
                 isClosable: true,
             })
-                router.push("/resources?sort=-created_at&category=&search=")
+                router.push("/resources")
         }
     }
 
