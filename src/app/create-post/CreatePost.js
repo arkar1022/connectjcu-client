@@ -4,6 +4,7 @@ import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 import { Container, Text, Box, Input, HStack, Select, Button, Image, VStack, useTimeout } from "@chakra-ui/react";
 import BlogPost from "./BlogPost";
 import ResourcePost from "./ResourcePost";
+import QnaPost from "./QnaPost";
 export default function CreatePost({ res }) {
     const [isClient, setIsClient] = useState(false)
     const [categories, SetCategories] = useState(null)
@@ -29,7 +30,7 @@ export default function CreatePost({ res }) {
                     <ResourcePost categories={categories} /> 
                     </TabPanel>
                     <TabPanel>
-                        <p>QnA</p>
+                        <QnaPost categories={categories} />
                     </TabPanel>
                 </TabPanels>
             </Tabs>

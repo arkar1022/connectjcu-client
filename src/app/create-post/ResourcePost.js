@@ -6,7 +6,7 @@ import 'react-quill/dist/quill.snow.css';
 import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { SubmitResource } from "../resource_actions";
-import PostBlogBtn from "./PostBlogBtn";
+import PostBtn from "./PostBtn";
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 export default function ResourcePost({ categories }) {
@@ -97,7 +97,7 @@ export default function ResourcePost({ categories }) {
                             </Text>
                     )}
                     <form action={() => handleSubmitResource()}>
-                        <PostBlogBtn />
+                        <PostBtn />
                     </form>
                 </HStack>
 

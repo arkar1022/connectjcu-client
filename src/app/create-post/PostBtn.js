@@ -1,7 +1,7 @@
 'use client';
 import { Button, Spinner } from "@chakra-ui/react";
 import { useFormStatus } from "react-dom";
-const PostBlogBtn = () => {
+const PostBtn = () => {
     const { pending } = useFormStatus();
     return (
 
@@ -11,4 +11,4 @@ const PostBlogBtn = () => {
     )
 }
 
-export default PostBlogBtn
+export default PostBtn

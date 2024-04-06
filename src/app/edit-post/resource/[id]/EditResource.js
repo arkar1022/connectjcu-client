@@ -120,7 +120,7 @@ export default function EditResource({ resCat, resRes }) {
         <Container maxW={"96em"} my={8}>
             <Box>
                 <HStack justifyContent={"space-between"} mb={6}>
-                    <Text fontWeight={800} fontSize={{ base: "18px", md: "22px" }} className={`${work_sans.className}`}>Create New Resource</Text>
+                    <Text fontWeight={800} fontSize={{ base: "18px", md: "22px" }} className={`${work_sans.className}`}>Edit Resource</Text>
                     <HStack pb={6} pos={"relative"} justifyContent={"flex-end"}>
                         {error && (
                             <Text bottom={"0px"} right={"0px"} pos={"absolute"} color={"red"} fontSize={{ base: "12px", md: "12px" }} className={`${work_sans.className}`}>

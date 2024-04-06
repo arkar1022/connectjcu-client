@@ -14,7 +14,7 @@ export default function Comment ({comment}) {
     return (
         <Box mb={4}>
         <HStack mb={{ base: 6, md: 9 }} justifyContent={"flex-start"} w={"100%"} spacing={{ base: 4, md: 6 }} align="top">
-            <Box w={{ base: "35px", md: "50px" }} h={{ base: "35px", md: "50px" }} minW={25} rounded={"50%"} backgroundPosition={"center"} backgroundImage={`url('https://www.connectjcu.club/media/${comment.author.profile_image}')`} backgroundSize={"cover"} />
+            <Box w={{ base: "35px", md: "45px" }} h={{ base: "35px", md: "45px" }} minW={25} rounded={"50%"} backgroundPosition={"center"} backgroundImage={`url('https://www.connectjcu.club/media/${comment.author.profile_image}')`} backgroundSize={"cover"} />
             <VStack alignItems={"flex-start"} spacing={{ base: 2, md: 4 }} flex={1}>
                 <HStack spacing={4}>
                     <Text className={`${open_sans.className}`} fontSize={{ base: "14px", md: "18px" }} fontWeight={500}>

@@ -382,7 +382,7 @@ const NAV_ITEMS = [
     },
     {
         label: 'Q/A',
-        href: '/qna',
+        href: '/qna?sort=-created_at&category=&search=',
     },
 
 ]
