@@ -33,7 +33,7 @@ const Resources = ({ resourceResponse, catResponse }) => {
             setCategories(catResponse.data)
         }
         setIsClient(true)
-    }, [resourceResponse])
+    }, [resourceResponse,catResponse])
 
 
     const handleSearchOnClick  = (e) => {

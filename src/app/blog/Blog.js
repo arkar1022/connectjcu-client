@@ -48,7 +48,7 @@ const Blog = ({ blogResponse, catResponse }) => {
             setCategories(catResponse.data)
         }
         setIsClient(true)
-    }, [blogResponse])
+    }, [blogResponse, catResponse])
 
     const handleSortOnChange = (e) => {
         setSelectedSort(e.target.value)

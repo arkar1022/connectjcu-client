@@ -48,7 +48,7 @@ const Qna = ({ qnaResponse, catResponse }) => {
             setCategories(catResponse.data)
         }
         setIsClient(true)
-    }, [qnaResponse])
+    }, [qnaResponse, catResponse])
 
     const handleSortOnChange = (e) => {
         setSelectedSort(e.target.value)
