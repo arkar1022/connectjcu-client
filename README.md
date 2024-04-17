@@ -1,36 +1,44 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# ConnectJCU Project
 
-## Getting Started
+## Team
 
-First, run the development server:
+1. Dao Ngoc Tuan - 14399066
+2. Ar Kar - 14377336
+3. Andre Jonathan - 14329484
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+# _General_ project planning BEFORE iteration-1
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Iteration 1 [3.5 weeks] (started day: 11/3/2024)
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+1. [Login/ Signup](./user_stories/login_signup.md), priority 10, 3 days
+2. [View a blog](./user_stories/view_blog.md), priority 10, 3 days
+3. [Post a blog](./user_stories/post_a_blog.md), priority 10, 3 days
+4. [Edit a blog](./user_stories/edit_blog.md), priority 10, 3 days
+5. [View user profile](./user_stories/view_user_profile.md), priority 20, 3 days
+6. [Download the material/result](./user_stories/download_resources.md), priority 30, 3 days
+7. [User Upload resources](./user_stories/upload_resources.md), priority 30, 3 days
+8. [Search/sort/filter blog)](./user_stories/search_filter_blog.md), priority 30, 4 days
+   Total: 25 days
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Iteration 2 [2.5 weeks] (started day: 05/4/2024)
 
-## Learn More
+1. [Modify posted resources](./user_stories/modify_posted_resources.md), priority 30, 2 days
+2. [Search/sort/filter resources](./user_stories/search_filter_resources.md), priority 30, 3 days
+3. [Add Q&A section](./user_stories/user_story_01_title.md), priority 30, 5 days
+4. [Blog comment](./user_stories/download_resources.md), priority 30, 3 days
+5. [View other profile](./user_stories/user_story_01_title.md), priority 20, 3 days
+6. [Find related blog](./user_stories/user_story_01_title.md), priority 30, 3 days
 
-To learn more about Next.js, take a look at the following resources:
+Total: 13 days
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Not enough time/developers:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+1. View other profilep, riority 30, 3 days
+2. Find related blog, priority 30, 3 days
 
-## Deploy on Vercel
+Total: 6 days
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# Actual iterations
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+1. [Iteration-1](./iteration_1.md)
+2. [Iteration-2](./iteration_2.md)
