@@ -1,9 +1,9 @@
 'use server';
 import { cookies } from "next/headers";
-export async function FetchResources(search, category, sort) {
+export async function FetchResources(search, category, sort, user) {
     try {
         const access_token = cookies().get('_access')?.value
-        const res = await fetch(`${process.env.API_URL}/api/v1/resources/?sort=${sort?sort:""}&category=${category?category:""}&search=${search?search:""}`, {
+        const res = await fetch(`${process.env.API_URL}/api/v1/resources/?user=${user?user:""}&sort=${sort?sort:""}&category=${category?category:""}&search=${search?search:""}`, {
             method: 'GET',
             headers: {
                 "Authorization": `Bearer ${access_token}`
