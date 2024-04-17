@@ -79,12 +79,12 @@ export default function BlogDetail({ res }) {
                         </Text>
                     </HStack>
                     <HStack display={{ base: "flex", md: "flex" }} alignItems={"center"} spacing={{ base: 2, md: 4 }} justifyContent={"center"}>
-                        <Box width={{ base: "24px", md: "28px" }} height={{ base: "24px", md: "28px" }}>
+                        {/* <Box width={{ base: "24px", md: "28px" }} height={{ base: "24px", md: "28px" }}>
                             <IconHeartFilled style={{ width: "inherit", height: "inherit" }} color="#FF5480" />
                         </Box>
                         <Text color={"#97989F"} fontSize={"14px"} className={`${work_sans.className}`}>
                             134
-                        </Text>
+                        </Text> */}
                         <Box width={{ base: "24px", md: "28px" }} height={{ base: "24px", md: "28px" }}>
                             <IconEye style={{ width: "inherit", height: "inherit" }} />
                         </Box>
