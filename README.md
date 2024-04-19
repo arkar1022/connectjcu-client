@@ -33,7 +33,7 @@ Total: 13 days
 
 ### Not enough time/developers:
 
-1. View other profilep, riority 30, 3 days
+1. View other profile priority 30, 3 days
 2. Find related blog, priority 30, 3 days
 
 Total: 6 days
