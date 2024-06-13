@@ -7,6 +7,7 @@ import LoginBtn from "./LoginBtn";
 import { IconMail, IconLock, IconEyeClosed, IconEye } from "@tabler/icons-react";
 import { authStore } from "@/stores/authStore";
 
+//login
 const Login = ({ LoginAccount }) => {
     const [showPassword, setShowPassword] = useState(false);
     const handlePasswordOnClick = () => setShowPassword(!showPassword);
