@@ -1,14 +1,19 @@
+
 # ConnectJCU Project
 
 This is a community platform designed exclusively for James Cook University students. Here, students can come together to connect, share, and engage in meaningful discussions. Whether you're looking to share your experiences through blogs, discover insightful articles and resources, or seek answers to burning questions, connectJCU has you covered. Our platform offers a diverse range of features, including a blog section where students can showcase their stories and insights, a repository of articles and resources for academic and personal growth, and a dedicated Q&A section where students can seek advice and support from their peers.
 
 - Website: https://www.connectjcu.org/
-- Admin page: https://connectjcu.club/admin
+- Admin page: https://connectjcu.club/admin (Have been terminated due to service cost)
 - Github:
 - Front- end:https://github.com/arkar1022/connectjcu-client/tree/main
 - Back- end: https://github.com/arkar1022/connectjcu-server
 - Database: We used the MySQL DB from : https://aiven.io/
  ServiceURI: mysql://avnadmin:AVNS_bZZ2XAbxxPyN1wWFr0q@connectjcu-db-arkar1022-d06f.a.aivencloud.com:12662/defaultdb?ssl-mode=REQUIRED
+
+##Important! (30 Jun 2024)
+Frontend Site (hosting on vercel) will be not working properly anymore since I have terminated backend server.
+But you can try it on your local.
 
 ## Team
 
