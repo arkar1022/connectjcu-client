@@ -13,7 +13,7 @@ This is a community platform designed exclusively for James Cook University stud
 
 ## Important! (30 Jun 2024)
 Frontend Site (hosting on vercel) will be not working properly anymore since I have terminated backend server.
-But you can try it on your local.
+But you can try it on your local. #ArKar
 
 ## Team
 
